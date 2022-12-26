@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import './App.css';
+import { HomeIcon, PlanedIcon, StarIcon } from '../components/icons';
 
 function App() {
   const [todos, setTodods] = useState([]);
@@ -17,19 +17,26 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  const collections = [{ title: 'home' }, { title: 'planed' }, { title: 'important' }];
+  const collections = [
+    { title: 'tasks', icon: <HomeIcon className="w-4 h-4" /> },
+    { title: 'planed', icon: <PlanedIcon className="w-4 h-4" /> },
+    { title: 'favorite', icon: <StarIcon className="w-4 h-4" /> },
+  ];
 
   return (
-    <div className="App">
-      <section>
-        <h1>To-do app</h1>
+    <div className="min-h-screen flex gap-4">
+      <section className="p-5 flex-auto w-1/4 bg-slate-200">
+        <h1 className="mb-4 text-2xl uppercase">To-do app</h1>
         <ul>
           {collections.map((list, i) => (
-            <li key={i}>{list.title}</li>
+            <li key={i} className="mb-2 flex items-center gap-4">
+              <span>{list.icon}</span>
+              <span className="capitalize">{list.title}</span>
+            </li>
           ))}
         </ul>
       </section>
-      <section>
+      <section className="p-5 flex-auto w-3/4">
         <ul>
           {todos.map((todo) => (
             <li key={todo.id}>{todo.title}</li>
