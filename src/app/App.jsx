@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getDataFromCollection } from '../api/api';
-import { TodoSection, NavSection } from '../components';
+import { Route, Routes } from 'react-router-dom';
+import { getAllData } from '../api/api';
+import { TodoList, Layout } from '../components';
 import DBContext from '../context/db';
 
 function App() {
@@ -8,16 +9,18 @@ function App() {
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
-    getDataFromCollection('todos').then(setTodods);
-    getDataFromCollection('lists').then(setLists);
+    getAllData('todos').then(setTodods);
+    getAllData('lists').then(setLists);
   }, []);
 
   return (
     <DBContext.Provider value={{ todos, lists }}>
-      <div className="min-h-screen flex gap-4">
-        <NavSection />
-        <TodoSection />
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<div />} />
+          <Route path="/:listId" element={<TodoList />} />
+        </Route>
+      </Routes>
     </DBContext.Provider>
   );
 }

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { HomeIcon, PlanedIcon, StarIcon, ListIcon } from './index';
 import DBContext from '../context/db';
 
-export function NavSection() {
+export function NavList() {
   const mainLists = [
     { title: 'tasks', icon: <HomeIcon className="w-4 h-4" />, to: '/' },
     { title: 'planned', icon: <PlanedIcon className="w-4 h-4" />, to: '/planned' },
@@ -13,7 +13,7 @@ export function NavSection() {
   const { lists } = useContext(DBContext);
 
   return (
-    <section className="p-5 flex-auto w-1/4 bg-slate-200">
+    <>
       <h1 className="mb-4 text-2xl uppercase">To-do app</h1>
       <ul>
         {mainLists.map((list, i) => (
@@ -34,6 +34,6 @@ export function NavSection() {
           </li>
         ))}
       </ul>
-    </section>
+    </>
   );
 }
