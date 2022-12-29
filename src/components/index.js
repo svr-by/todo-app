@@ -3,5 +3,7 @@ export { PlanedIcon } from './icons/PlanedIcon';
 export { StarIcon } from './icons/StarIcon';
 export { ListIcon } from './icons/ListIcon';
 export { NavList } from './NavList';
+export { NavListItem } from './NavListItem';
 export { TodoList } from './TodoList';
+export { TodoListItem } from './TodoListItem';
 export { Layout } from './Layout';
