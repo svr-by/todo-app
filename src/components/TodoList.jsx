@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDataByLisId } from '../api/api';
-import { TodoListItem } from './index';
+import { TodoForm, TodoListItem } from './index';
 import DBContext from '../context/db';
 
 export function TodoList() {
@@ -28,6 +28,7 @@ export function TodoList() {
         {todos.map((todo) => (
           <TodoListItem key={todo.id} todo={todo} />
         ))}
+        <TodoForm />
       </ul>
     </>
   );

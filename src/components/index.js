@@ -6,4 +6,5 @@ export { NavList } from './NavList';
 export { NavListItem } from './NavListItem';
 export { TodoList } from './TodoList';
 export { TodoListItem } from './TodoListItem';
+export { TodoForm } from './TodoForm';
 export { Layout } from './Layout';
