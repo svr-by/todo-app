@@ -1,20 +1,21 @@
 import { useState } from 'react';
 
-export function TodoForm() {
+export function TodoForm({ onSubmit }) {
   const [title, setTitle] = useState('');
 
   const onChange = (e) => {
     const value = e.target.value;
     setTitle(value);
   };
-  const onSubmmit = (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title);
+    onSubmit(title);
     setTitle('');
   };
 
   return (
-    <form onSubmit={onSubmmit}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         value={title}
