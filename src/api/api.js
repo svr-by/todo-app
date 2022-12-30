@@ -1,4 +1,13 @@
-import { collection, query, where, getDocs, getDoc, addDoc, deleteDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  addDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 
 export async function getAllData(collectionTitle) {
@@ -19,4 +28,8 @@ export async function createTodo(data) {
   });
   const docSnap = await getDoc(docRef);
   return { id: docSnap.id, ...docSnap.data() };
+}
+
+export async function deleteTodo(todoId) {
+  await deleteDoc(doc(db, 'todos', todoId));
 }

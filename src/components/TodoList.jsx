@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { createTodo, getTodosByLisId } from '../api/api';
+import { createTodo, deleteTodo, getTodosByLisId } from '../api/api';
 import { TodoForm, TodoListItem } from './index';
 import DBContext from '../context/db';
 
@@ -25,6 +25,12 @@ export function TodoList() {
     setTodods([...todos, doc]);
   };
 
+  const handleDelete = async (todoId) => {
+    console.log('delete', todoId);
+    await deleteTodo(todoId);
+    setTodods(todos.filter((todo) => todo.id !== todoId));
+  };
+
   if (!list) return <h2>List not found!</h2>;
 
   return (
@@ -32,7 +38,7 @@ export function TodoList() {
       <h2 className="text-xl mb-6 uppercase">{`${list.title} list`}</h2>
       <ul className="flex flex-col gap-2">
         {todos.map((todo) => (
-          <TodoListItem key={todo.id} todo={todo} />
+          <TodoListItem key={todo.id} todo={todo} onDelete={handleDelete} />
         ))}
         <TodoForm onSubmit={handleSubmit} />
       </ul>

@@ -2,6 +2,7 @@ export { HomeIcon } from './icons/HomeIcon';
 export { PlanedIcon } from './icons/PlanedIcon';
 export { StarIcon } from './icons/StarIcon';
 export { ListIcon } from './icons/ListIcon';
+export { DeleteIcon } from './icons/DeleteIcon';
 export { NavList } from './NavList';
 export { NavListItem } from './NavListItem';
 export { TodoList } from './TodoList';
