@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import { HomeIcon, PlanedIcon, StarIcon, ListIcon, NavListItem } from './index';
-import DBContext from '../context/db';
+import { useApi } from '../hooks/useApi';
 
 export function NavList() {
   const mainLists = [
@@ -9,7 +8,9 @@ export function NavList() {
     { title: 'favorite', icon: <StarIcon className="w-4 h-4" />, to: '/favorite' },
   ];
 
-  const { lists } = useContext(DBContext);
+  const {
+    data: { lists },
+  } = useApi();
 
   return (
     <>

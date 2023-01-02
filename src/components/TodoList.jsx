@@ -1,34 +1,29 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { createTodo, deleteTodo, getTodosByLisId } from '../api/api';
 import { TodoForm, TodoListItem } from './index';
-import DBContext from '../context/db';
+import { useApi } from '../hooks/useApi';
 
 export function TodoList() {
-  const [todos, setTodods] = useState([]);
   const { listId } = useParams();
 
-  const { lists } = useContext(DBContext);
+  const {
+    data: { lists, todos },
+    actions: api,
+  } = useApi();
+
   const list = lists.find((list) => list.id === listId);
 
   useEffect(() => {
-    async function getData() {
-      const data = await getTodosByLisId('todos', listId);
-      setTodods(data);
-    }
-    getData();
+    api.getListTodos(listId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listId]);
 
   const handleSubmit = async (title) => {
-    const data = { title, listId };
-    const doc = await createTodo(data);
-    setTodods([...todos, doc]);
+    api.createTodo({ title, listId });
   };
 
   const handleDelete = async (todoId) => {
-    console.log('delete', todoId);
-    await deleteTodo(todoId);
-    setTodods(todos.filter((todo) => todo.id !== todoId));
+    api.deleteTodo(todoId);
   };
 
   if (!list) return <h2>List not found!</h2>;
