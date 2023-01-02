@@ -26,6 +26,10 @@ export function TodoList() {
     api.deleteTodo(todoId);
   };
 
+  const handleUpdate = async (todoId, data) => {
+    api.updateTodo(todoId, data);
+  };
+
   if (!list) return <h2>List not found!</h2>;
 
   return (
@@ -33,7 +37,7 @@ export function TodoList() {
       <h2 className="text-xl mb-6 uppercase">{`${list.title} list`}</h2>
       <ul className="flex flex-col gap-2">
         {todos.map((todo) => (
-          <TodoListItem key={todo.id} todo={todo} onDelete={handleDelete} />
+          <TodoListItem key={todo.id} todo={todo} onDelete={handleDelete} onUpdate={handleUpdate} />
         ))}
         <TodoForm onSubmit={handleSubmit} />
       </ul>

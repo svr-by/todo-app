@@ -6,12 +6,12 @@ export function useApi() {
   const [todos, setTodods] = useState([]);
 
   useEffect(() => {
-    firebaseApi.getCollectionData('lists').then(setLists);
+    firebaseApi.getCollectionDocs('lists').then(setLists);
   }, []);
 
   async function getListTodos(listId) {
     if (listId) {
-      const listTodos = await firebaseApi.getFilteredData('todos', 'listId', listId);
+      const listTodos = await firebaseApi.getFilteredDocs('todos', 'listId', listId);
       setTodods(listTodos);
     } else {
       setTodods([]);
@@ -24,6 +24,11 @@ export function useApi() {
       completed: false,
     });
     setTodods([...todos, todo]);
+  }
+
+  async function updateTodo(todoId, todoData) {
+    await firebaseApi.updateDocById('todos', todoId, todoData);
+    setTodods(todos.map((todo) => (todo.id === todoId ? { ...todo, ...todoData } : todo)));
   }
 
   async function deleteTodo(todoId) {
@@ -39,6 +44,7 @@ export function useApi() {
     actions: {
       getListTodos,
       createTodo,
+      updateTodo,
       deleteTodo,
     },
   };
