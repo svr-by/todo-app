@@ -1,10 +1,6 @@
 import { DeleteIcon } from './index';
 
-export function TodoListItem({ todo, onDelete, onUpdate }) {
-  const handleDelete = () => {
-    onDelete(todo.id);
-  };
-
+export function TodoListItem({ todo, onDelete, onUpdate, onSelect }) {
   const handleUpdateStatus = (e) => {
     const statusValue = e.target.checked;
     onUpdate(todo.id, { completed: statusValue });
@@ -18,12 +14,15 @@ export function TodoListItem({ todo, onDelete, onUpdate }) {
         checked={todo.completed}
         onChange={handleUpdateStatus}
       />
-      <span className="grow capitalize peer-checked:line-through peer-checked:text-gray-400">
+      <span
+        className="grow capitalize cursor-pointer peer-checked:line-through peer-checked:text-gray-400"
+        onClick={() => onSelect(todo)}
+      >
         {todo.title}
       </span>
       <DeleteIcon
         className="w-4 h-4 cursor-pointer invisible group-hover/item:visible"
-        onClick={handleDelete}
+        onClick={() => onDelete(todo.id)}
       />
     </li>
   );

@@ -4,18 +4,21 @@ import * as firebaseApi from '../api/firebaseApi';
 export function useApi() {
   const [lists, setLists] = useState([]);
   const [todos, setTodods] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     firebaseApi.getCollectionDocs('lists').then(setLists);
   }, []);
 
   async function getListTodos(listId) {
+    setLoading(true);
     if (listId) {
       const listTodos = await firebaseApi.getFilteredDocs('todos', 'listId', listId);
       setTodods(listTodos);
     } else {
       setTodods([]);
     }
+    setLoading(false);
   }
 
   async function createTodo(todoData) {
@@ -41,6 +44,7 @@ export function useApi() {
       lists,
       todos,
     },
+    isLoading,
     actions: {
       getListTodos,
       createTodo,

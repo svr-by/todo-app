@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { PlusIcon } from '../components/index';
 
 export function TodoForm({ onSubmit }) {
   const [title, setTitle] = useState('');
@@ -15,13 +16,14 @@ export function TodoForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="p-2 flex items-center bg-slate-100">
+      <PlusIcon className="w-4 h-4 mr-4" />
       <input
         type="text"
         value={title}
         onChange={onChange}
-        className="w-full p-2 border-0 outline-0 bg-slate-100"
-        placeholder="Add new todos"
+        className="w-full border-0 outline-0 bg-inherit"
+        placeholder="Add a new todo"
       />
     </form>
   );
