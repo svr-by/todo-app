@@ -21,7 +21,7 @@ export function TodoListItem({ todo, onDelete, onUpdate, onSelect }) {
         {todo.title}
       </span>
       <DeleteIcon
-        className="w-4 h-4 cursor-pointer invisible group-hover/item:visible"
+        className="w-4 h-4 cursor-pointer invisible group-hover/item:visible hover:stroke-violet-600"
         onClick={() => onDelete(todo.id)}
       />
     </li>

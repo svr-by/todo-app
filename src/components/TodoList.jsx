@@ -44,25 +44,29 @@ export function TodoList() {
 
   const list = lists.find((list) => list.id === listId);
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : !list ? (
-    <h2>List not found!</h2>
-  ) : (
+  return (
     <>
-      <h2 className="text-xl mb-6 uppercase">{`${list.title} list`}</h2>
-      <ul className="flex flex-col gap-2">
-        {todos.map((todo) => (
-          <TodoListItem
-            key={todo.id}
-            todo={todo}
-            onDelete={handleDelete}
-            onUpdate={handleUpdate}
-            onSelect={handleSelect}
-          />
-        ))}
-        <TodoForm onSubmit={handleSubmit} />
-      </ul>
+      <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">{`${list?.title} list`}</h2>
+      <div className="p-5">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : !list ? (
+          <h2>List not found!</h2>
+        ) : (
+          <ul className="flex flex-col gap-2">
+            {todos.map((todo) => (
+              <TodoListItem
+                key={todo.id}
+                todo={todo}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+                onSelect={handleSelect}
+              />
+            ))}
+            <TodoForm onSubmit={handleSubmit} />
+          </ul>
+        )}
+      </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <h3>{selectedTodo?.title}</h3>
         <p>{selectedTodo?.id}</p>
