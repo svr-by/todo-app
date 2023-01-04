@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { StateContext } from '../store';
 import { useParams } from 'react-router-dom';
 import { TodoForm, TodoListItem, Modal } from './index';
-import { useApi } from '../hooks/useApi';
 
 export function TodoList() {
+  const {
+    state: { lists, todos, isLoading },
+    dispatch,
+    actions,
+  } = useContext(StateContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
 
   const { listId } = useParams();
 
   useEffect(() => {
-    api.getListTodos(listId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listId]);
+    (async function () {
+      actions.setLoading(dispatch, true);
+      await actions.getListTodos(dispatch, listId);
+      actions.setLoading(dispatch, false);
+    })();
+  }, [listId, actions, dispatch]);
 
-  const {
-    data: { lists, todos },
-    isLoading,
-    actions: api,
-  } = useApi();
-
-  const handleSubmit = async (title) => {
-    api.createTodo({ title, listId });
-  };
-
-  const handleDelete = async (todoId) => {
-    api.deleteTodo(todoId);
-  };
-
-  const handleUpdate = async (todoId, data) => {
-    api.updateTodo(todoId, data);
+  const handleSubmit = (title) => {
+    actions.createTodo(dispatch, { title, listId });
   };
 
   const handleCloseModal = () => {
@@ -55,13 +49,7 @@ export function TodoList() {
         ) : (
           <ul className="flex flex-col gap-2">
             {todos.map((todo) => (
-              <TodoListItem
-                key={todo.id}
-                todo={todo}
-                onDelete={handleDelete}
-                onUpdate={handleUpdate}
-                onSelect={handleSelect}
-              />
+              <TodoListItem key={todo.id} todo={todo} onSelect={handleSelect} />
             ))}
             <TodoForm onSubmit={handleSubmit} />
           </ul>

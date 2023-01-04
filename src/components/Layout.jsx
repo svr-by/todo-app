@@ -7,7 +7,7 @@ export function Layout() {
       <section className="p-5 w-1/4 min-w-[300px]">
         <NavList />
       </section>
-      <section className="flex-auto w-auto bg-slate-200">
+      <section className="w-auto min-w-[300px] flex-auto bg-slate-200">
         <Outlet />
       </section>
     </div>

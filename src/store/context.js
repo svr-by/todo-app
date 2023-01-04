@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export default createContext({ todos: [], lists: [] });
+export default createContext();
