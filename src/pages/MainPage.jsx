@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import { NavList } from './index';
+import { NavList } from '../components/index';
 
-export function Layout() {
+export function MainPage() {
   return (
     <div className="min-h-screen flex gap-4">
       <section className="p-5 w-1/4 min-w-[300px]">

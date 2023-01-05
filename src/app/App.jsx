@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { TodoList, Layout } from '../components';
+import { TodoList } from '../components';
+import { SignInPage, MainPage } from '../pages';
 import { StateContext, initialState, reducer, actions } from '../store';
 
 function App() {
@@ -9,10 +10,11 @@ function App() {
   return (
     <StateContext.Provider value={{ state, dispatch, actions }}>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<MainPage />}>
           <Route index element={<div />} />
           <Route path="/:listId" element={<TodoList />} />
         </Route>
+        <Route path="/login" element={<SignInPage />} />
       </Routes>
     </StateContext.Provider>
   );
