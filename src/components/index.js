@@ -13,4 +13,5 @@ export { NavListItem } from './NavListItem';
 export { TodoList } from './TodoList';
 export { TodoListItem } from './TodoListItem';
 export { TodoForm } from './TodoForm';
+export { UserAuthForm } from './UserAuthForm';
 export { Modal } from './Modal';
