@@ -1,7 +1,9 @@
 export default function reducer(state, action) {
   switch (action.type) {
-    case 'SET_LOADING':
-      return { ...state, isLoading: action.payload.status };
+    case 'SIGNIN_USER':
+      return { ...state, user: action.payload.user, isLoading: false };
+    case 'SIGNOUT_USER':
+      return { ...state, user: null, isLoading: false };
     case 'GET_LISTS':
       return { ...state, lists: [...action.payload.lists] };
     case 'GET_TODOS':

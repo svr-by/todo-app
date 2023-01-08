@@ -7,6 +7,7 @@ export { CrossIcon } from './icons/CrossIcon';
 export { PlusIcon } from './icons/PlusIcon';
 export { EmailIcon } from './icons/EmailIcon';
 export { PasswordIcon } from './icons/PasswordIcon';
+export { SignOutIcon } from './icons/SignOutIcon';
 
 export { NavList } from './NavList';
 export { NavListItem } from './NavListItem';

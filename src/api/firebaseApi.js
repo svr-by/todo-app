@@ -10,7 +10,29 @@ import {
   updateDoc,
   deleteDoc,
 } from 'firebase/firestore';
-import { db } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
+import { db, auth } from '../firebase';
+
+export function signUpFirebase(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function signInFirebase(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function signOutFirebase() {
+  return signOut(auth);
+}
+
+export function onAuthFirebase(handlerAuth) {
+  return onAuthStateChanged(auth, handlerAuth);
+}
 
 export async function getCollectionDocs(collectionTitle) {
   const querySnapshot = await getDocs(collection(db, collectionTitle));

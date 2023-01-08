@@ -5,10 +5,12 @@ import { TodoForm, TodoListItem, Modal } from './index';
 
 export function TodoList() {
   const {
-    state: { lists, todos, isLoading },
+    state: { lists, todos },
     dispatch,
     actions,
   } = useContext(StateContext);
+
+  const [isLoading, setLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState(null);
 
@@ -16,9 +18,9 @@ export function TodoList() {
 
   useEffect(() => {
     (async function () {
-      actions.setLoading(dispatch, true);
+      setLoading(true);
       await actions.getListTodos(dispatch, listId);
-      actions.setLoading(dispatch, false);
+      setLoading(false);
     })();
   }, [listId, actions, dispatch]);
 

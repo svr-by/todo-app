@@ -1,7 +1,26 @@
 import * as firebaseApi from '../api/firebaseApi';
 
-export function setLoading(dispatch, status) {
-  dispatch({ type: 'SET_LOADING', payload: { status } });
+export async function signUp(email, password) {
+  return firebaseApi.signUpFirebase(email, password);
+}
+
+export async function signIn(email, password) {
+  return firebaseApi.signInFirebase(email, password);
+}
+
+export async function signOut() {
+  return firebaseApi.signOutFirebase();
+}
+
+export async function onAuth(dispatch) {
+  return firebaseApi.onAuthFirebase((user) => {
+    if (user) {
+      dispatch({ type: 'SIGNIN_USER', payload: { user } });
+      return user;
+    } else {
+      dispatch({ type: 'SIGNOUT_USER' });
+    }
+  });
 }
 
 export async function getLists(dispatch) {

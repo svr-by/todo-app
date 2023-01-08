@@ -1,5 +1,6 @@
 export default {
   lists: [],
   todos: [],
-  isLoading: false,
+  user: null,
+  isLoading: true,
 };

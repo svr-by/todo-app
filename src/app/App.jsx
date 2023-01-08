@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { TodoList } from '../components';
 import { SignInPage, SignUpPage, MainPage } from '../pages';
@@ -6,6 +6,10 @@ import { StateContext, initialState, reducer, actions } from '../store';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    actions.onAuth(dispatch);
+  }, []);
 
   return (
     <StateContext.Provider value={{ state, dispatch, actions }}>
