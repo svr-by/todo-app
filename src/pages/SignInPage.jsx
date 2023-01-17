@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { StateContext } from '../store';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAuthForm } from '../components';
+import * as ROUTES from '../constants/routes';
 
 export function SignInPage() {
   const [errorMes, setErrorMes] = useState(null);
@@ -31,7 +32,7 @@ export function SignInPage() {
   };
 
   return user ? (
-    <Navigate to="/" replace={true} />
+    <Navigate to={ROUTES.LANDING} replace={true} />
   ) : (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
       <h2 className="mb-4 text-center text-3xl font-semibold text-gray-900">
@@ -40,11 +41,11 @@ export function SignInPage() {
       <UserAuthForm onSubmit={handleSubmit} submitBtn="Sign In" />
       <p className="block mb-4 text-sm font-medium text-gray-700">
         No account?{' '}
-        <Link to="/signup" className="text-indigo-800 hover:text-indigo-600">
+        <Link to={ROUTES.SIGN_UP} className="text-indigo-800 hover:text-indigo-600">
           Sign up!
         </Link>{' '}
         Or return to{' '}
-        <Link to="/" className="text-indigo-800 hover:text-indigo-600">
+        <Link to={ROUTES.LANDING} className="text-indigo-800 hover:text-indigo-600">
           main page.
         </Link>
       </p>

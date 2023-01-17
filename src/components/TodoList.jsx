@@ -5,35 +5,50 @@ import { TodoForm, TodoListItem, Modal, TodoDetails } from './index';
 
 export function TodoList() {
   const {
-    state: { lists, todos },
+    state: { lists, todos, user },
     dispatch,
     actions,
   } = useContext(StateContext);
 
   const [isLoading, setLoading] = useState(false);
-  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [selectedTodoId, setSelectedTodoId] = useState(null);
 
   const { listId } = useParams();
 
   useEffect(() => {
     (async function () {
-      setSelectedTodo(null);
+      setSelectedTodoId(null);
       setLoading(true);
-      await actions.getListTodos(dispatch, listId);
+      if (listId === 'favorite') {
+        await actions.getFavoriteTodos(dispatch);
+      } else {
+        await actions.getListTodos(dispatch, listId);
+      }
       setLoading(false);
     })();
   }, [listId, actions, dispatch]);
 
   const handleSubmit = (title) => {
-    actions.createTodo(dispatch, { title, listId });
+    actions.createTodo(dispatch, {
+      listId,
+      userId: user.uid,
+      title,
+      description: '',
+      duedate: null,
+      steps: [],
+    });
   };
 
   const handleClose = () => {
-    setSelectedTodo(null);
+    setSelectedTodoId(null);
   };
 
   const handleSelect = (todo) => {
-    todo.id === selectedTodo?.id ? setSelectedTodo(null) : setSelectedTodo(todo);
+    todo.id === selectedTodoId ? setSelectedTodoId(null) : setSelectedTodoId(todo.id);
+  };
+
+  const selectTodo = (todoId) => {
+    return todos.find((todo) => todo.id === todoId);
   };
 
   const list = lists.find((list) => list.id === listId);
@@ -44,8 +59,6 @@ export function TodoList() {
       <div className="flex grow">
         {isLoading ? (
           <h2 className="p-5 text-l">Loading...</h2>
-        ) : !list ? (
-          <h2 className="p-5 text-l">List not found!</h2>
         ) : (
           <ul className="p-5 grow flex flex-col gap-2">
             {todos.map((todo) => (
@@ -54,7 +67,7 @@ export function TodoList() {
             <TodoForm onSubmit={handleSubmit} />
           </ul>
         )}
-        <TodoDetails todo={selectedTodo} onClose={handleClose} />
+        <TodoDetails todo={selectTodo(selectedTodoId)} onClose={handleClose} />
       </div>
     </div>
   );

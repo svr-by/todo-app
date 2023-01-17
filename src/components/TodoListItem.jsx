@@ -1,13 +1,18 @@
 import { useContext } from 'react';
 import { StateContext } from '../store';
-import { DeleteIcon } from './index';
+import { DeleteIcon, StarIcon } from './index';
 
 export function TodoListItem({ todo, onSelect }) {
   const { dispatch, actions } = useContext(StateContext);
 
-  const handleUpdate = (e) => {
-    const statusValue = e.target.checked;
-    actions.updateTodo(dispatch, todo.id, { completed: statusValue });
+  const handleUpdateStatus = () => {
+    const completed = !todo.completed;
+    actions.updateTodo(dispatch, todo.id, { completed });
+  };
+
+  const handleUpdateFavorite = () => {
+    const favorite = !todo.favorite;
+    actions.updateTodo(dispatch, todo.id, { favorite });
   };
 
   const handleDelete = () => {
@@ -20,7 +25,7 @@ export function TodoListItem({ todo, onSelect }) {
         type="checkbox"
         className="peer mr-4"
         checked={todo.completed}
-        onChange={handleUpdate}
+        onChange={handleUpdateStatus}
       />
       <span
         className="grow capitalize cursor-pointer peer-checked:line-through peer-checked:text-gray-400"
@@ -28,10 +33,19 @@ export function TodoListItem({ todo, onSelect }) {
       >
         {todo.title}
       </span>
-      <DeleteIcon
-        className="w-4 h-4 cursor-pointer invisible group-hover/item:visible hover:stroke-violet-600"
-        onClick={handleDelete}
-      />
+      <div className="flex gap-4">
+        <DeleteIcon
+          className="w-4 h-4 cursor-pointer invisible group-hover/item:visible hover:stroke-violet-600"
+          onClick={handleDelete}
+        />
+        <StarIcon
+          className={`w-4 h-4 cursor-pointer ${
+            todo.favorite ? 'visible' : 'invisible'
+          } group-hover/item:visible hover:stroke-violet-600`}
+          fill={todo.favorite ? 'currentColor' : 'none'}
+          onClick={handleUpdateFavorite}
+        />
+      </div>
     </li>
   );
 }

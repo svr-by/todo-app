@@ -29,10 +29,12 @@ export async function getLists(dispatch) {
 }
 
 export async function getListTodos(dispatch, listId) {
-  let todos = [];
-  if (listId) {
-    todos = await firebaseApi.getFilteredDocs('todos', 'listId', listId);
-  }
+  let todos = listId ? await firebaseApi.getFilteredDocs('todos', 'listId', listId) : [];
+  dispatch({ type: 'GET_TODOS', payload: { todos } });
+}
+
+export async function getFavoriteTodos(dispatch) {
+  const todos = await firebaseApi.getFilteredDocs('todos', 'favorite', true);
   dispatch({ type: 'GET_TODOS', payload: { todos } });
 }
 

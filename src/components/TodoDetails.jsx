@@ -9,10 +9,12 @@ export function TodoDetails({ todo, onClose }) {
           <button className="absolute top-2 right-2" onClick={onClose}>
             <CrossIcon className="w-4 h-4 hover:bg-slate-200 close-target" />
           </button>
-          <h4 className="font-bold">Title:</h4>
-          <h4>{todo?.title}</h4>
-          <h4 className="font-bold">Status:</h4>
-          <h4>{todo?.completed ? 'completed' : 'uncompleted'}</h4>
+          <p className="font-bold">Title:</p>
+          <p>{todo?.title}</p>
+          <p className="font-bold">Status:</p>
+          <p>{todo?.completed ? 'completed' : 'uncompleted'}</p>
+          <p className="font-bold">Favorite:</p>
+          <p>{todo?.favorite ? 'yes' : 'no'}</p>
         </div>
       )}
     </div>

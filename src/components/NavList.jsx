@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { StateContext } from '../store';
 import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon, NavListItem } from './index';
+import * as ROUTES from '../constants/routes';
 
 export function NavList() {
   const {
@@ -14,9 +15,9 @@ export function NavList() {
   }, [actions, dispatch]);
 
   const mainLists = [
-    { title: 'tasks', icon: <HomeIcon className="w-4 h-4" />, to: '/' },
-    { title: 'planned', icon: <PlanedIcon className="w-4 h-4" />, to: '/planned' },
-    { title: 'favorite', icon: <StarIcon className="w-4 h-4" />, to: '/favorite' },
+    { title: 'tasks', icon: <HomeIcon className="w-4 h-4" />, to: ROUTES.LANDING },
+    { title: 'planned', icon: <PlanedIcon className="w-4 h-4" />, to: ROUTES.PLANNED_TASKS },
+    { title: 'favorite', icon: <StarIcon className="w-4 h-4" />, to: ROUTES.FAVORITE_TASKS },
   ];
 
   const handleSigout = () => {
