@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { StateContext } from '../store';
 import { Outlet, Navigate } from 'react-router-dom';
-import { NavList } from '../components/index';
+import { ListSection, TodoSection } from '../components/index';
+import * as ROUTES from '../constants/routes';
 
 export function MainPage() {
   const {
@@ -11,15 +12,13 @@ export function MainPage() {
   return isLoading ? (
     <div className="h-screen flex justify-center items-center">Loading...</div>
   ) : !user ? (
-    <Navigate to="/signin" replace={true} />
+    <Navigate to={ROUTES.SIGN_IN} replace={true} />
   ) : (
     <div className="min-h-screen flex gap-4">
-      <section className="p-5 w-1/4 min-w-[300px]">
-        <NavList />
-      </section>
-      <section className="w-auto min-w-[300px] flex-auto bg-slate-200">
+      <ListSection />
+      <TodoSection>
         <Outlet />
-      </section>
+      </TodoSection>
     </div>
   );
 }

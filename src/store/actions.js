@@ -28,6 +28,11 @@ export async function getLists(dispatch) {
   dispatch({ type: 'GET_LISTS', payload: { lists } });
 }
 
+export async function getMainTodos(dispatch) {
+  const todos = await firebaseApi.getFilteredDocs('todos', 'listId', '');
+  dispatch({ type: 'GET_TODOS', payload: { todos } });
+}
+
 export async function getListTodos(dispatch, listId) {
   let todos = listId ? await firebaseApi.getFilteredDocs('todos', 'listId', listId) : [];
   dispatch({ type: 'GET_TODOS', payload: { todos } });

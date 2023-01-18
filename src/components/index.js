@@ -9,8 +9,11 @@ export { EmailIcon } from './icons/EmailIcon';
 export { PasswordIcon } from './icons/PasswordIcon';
 export { SignOutIcon } from './icons/SignOutIcon';
 
-export { NavList } from './NavList';
+export { ListSection } from './ListSection';
 export { NavListItem } from './NavListItem';
+export { MainList } from './MainList';
+export { FavoriteList } from './FavoriteList';
+export { TodoSection } from './TodoSection';
 export { TodoList } from './TodoList';
 export { TodoListItem } from './TodoListItem';
 export { TodoForm } from './TodoForm';

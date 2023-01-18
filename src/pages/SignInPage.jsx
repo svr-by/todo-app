@@ -32,7 +32,7 @@ export function SignInPage() {
   };
 
   return user ? (
-    <Navigate to={ROUTES.LANDING} replace={true} />
+    <Navigate to={ROUTES.MAIN} replace={true} />
   ) : (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
       <h2 className="mb-4 text-center text-3xl font-semibold text-gray-900">
@@ -46,7 +46,7 @@ export function SignInPage() {
         </Link>{' '}
         Or return to{' '}
         <Link to={ROUTES.LANDING} className="text-indigo-800 hover:text-indigo-600">
-          main page.
+          landing page.
         </Link>
       </p>
       {errorMes && (
