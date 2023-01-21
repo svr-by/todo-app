@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { StateContext } from '../store';
-import { TodoForm, TodoListItem, TodoDetails } from './index';
+import { TodoForm, TodoListItem, TodoDetails, Spinner } from './index';
 
 export function TodoList({ isLoading, onSubmit }) {
   const {
@@ -26,7 +26,7 @@ export function TodoList({ isLoading, onSubmit }) {
   const completedTodos = todos.filter((todo) => todo.completed);
 
   return isLoading ? (
-    <h2 className="p-5 text-l">Loading...</h2>
+    <Spinner />
   ) : (
     <div className="flex grow">
       <div className="grow">

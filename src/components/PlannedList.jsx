@@ -34,11 +34,7 @@ export function PlannedList() {
   return (
     <>
       <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">Planned list</h2>
-      {isLoading ? (
-        <h2 className="p-5 text-l">Loading...</h2>
-      ) : (
-        <TodoList onSubmit={handleSubmit} />
-      )}
+      <TodoList isLoading={isLoading} onSubmit={handleSubmit} />
     </>
   );
 }

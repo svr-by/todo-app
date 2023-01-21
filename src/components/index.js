@@ -21,3 +21,4 @@ export { TodoForm } from './TodoForm';
 export { TodoDetails } from './TodoDetails';
 export { UserAuthForm } from './UserAuthForm';
 export { Modal } from './Modal';
+export { Spinner } from './Spinner';
