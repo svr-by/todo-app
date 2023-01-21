@@ -16,7 +16,7 @@ export function TodoForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-2 flex items-center bg-slate-100">
+    <form onSubmit={handleSubmit} className="mt-1 p-2 flex items-center bg-slate-100">
       <PlusIcon className="w-4 h-4 mr-4" />
       <input
         type="text"

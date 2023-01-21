@@ -1,6 +1,10 @@
 import { CrossIcon } from './icons/CrossIcon';
 
 export function TodoDetails({ todo, onClose }) {
+  const getDueDate = (dueDate) => {
+    return dueDate ? new Date(dueDate.seconds * 1000).toDateString() : 'no';
+  };
+
   return (
     <div className={`bg-white ease-in-out duration-500 ${todo ? 'w-60 ' : 'w-0'}`}>
       {todo && (
@@ -15,6 +19,8 @@ export function TodoDetails({ todo, onClose }) {
           <p>{todo?.completed ? 'completed' : 'uncompleted'}</p>
           <p className="font-bold">Favorite:</p>
           <p>{todo?.favorite ? 'yes' : 'no'}</p>
+          <p className="font-bold">Due date:</p>
+          <p>{getDueDate(todo?.dueDate)}</p>
         </div>
       )}
     </div>

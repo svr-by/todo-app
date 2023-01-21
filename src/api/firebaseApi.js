@@ -39,8 +39,14 @@ export async function getCollectionDocs(collectionTitle) {
   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
-export async function getFilteredDocs(collectionTitle, field, fieldValue) {
+export async function getEqualToDocs(collectionTitle, field, fieldValue) {
   const q = query(collection(db, collectionTitle), where(field, '==', fieldValue));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}
+
+export async function getNotEqualDocs(collectionTitle, field, fieldValue) {
+  const q = query(collection(db, collectionTitle), where(field, '!=', fieldValue));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }

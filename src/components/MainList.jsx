@@ -32,7 +32,7 @@ export function MainList() {
       userId: user.uid,
       title,
       description: '',
-      duedate: null,
+      dueDate: null,
       steps: [],
     });
   };
@@ -44,11 +44,7 @@ export function MainList() {
       <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">{`${
         listId ? list?.title : 'Main'
       } list`}</h2>
-      {isLoading ? (
-        <h2 className="p-5 text-l">Loading...</h2>
-      ) : (
-        <TodoList onSubmit={handleSubmit} />
-      )}
+      <TodoList isLoading={isLoading} onSubmit={handleSubmit} />
     </>
   );
 }

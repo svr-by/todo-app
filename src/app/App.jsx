@@ -1,6 +1,6 @@
 import { useReducer, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { MainList, FavoriteList } from '../components';
+import { MainList, FavoriteList, PlannedList } from '../components';
 import { SignInPage, SignUpPage, MainPage, LandingPage, NotFoundPage } from '../pages';
 import { StateContext, initialState, reducer, actions } from '../store';
 import * as ROUTES from '../constants/routes';
@@ -22,6 +22,9 @@ function App() {
         </Route>
         <Route path={ROUTES.FAVORITE} element={<MainPage />}>
           <Route index element={<FavoriteList />} />
+        </Route>
+        <Route path={ROUTES.PLANNED} element={<MainPage />}>
+          <Route index element={<PlannedList />} />
         </Route>
         <Route path={ROUTES.SIGN_IN} element={<SignInPage />} />
         <Route path={ROUTES.SIGN_UP} element={<SignUpPage />} />

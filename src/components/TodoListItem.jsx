@@ -28,7 +28,7 @@ export function TodoListItem({ todo, onSelect }) {
         onChange={handleUpdateStatus}
       />
       <span
-        className="grow capitalize cursor-pointer peer-checked:line-through peer-checked:text-gray-400"
+        className="grow cursor-pointer peer-checked:line-through peer-checked:text-gray-400"
         onClick={() => onSelect(todo)}
       >
         {todo.title}

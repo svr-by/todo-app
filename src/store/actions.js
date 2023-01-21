@@ -29,17 +29,22 @@ export async function getLists(dispatch) {
 }
 
 export async function getMainTodos(dispatch) {
-  const todos = await firebaseApi.getFilteredDocs('todos', 'listId', '');
+  const todos = await firebaseApi.getEqualToDocs('todos', 'listId', '');
   dispatch({ type: 'GET_TODOS', payload: { todos } });
 }
 
 export async function getListTodos(dispatch, listId) {
-  let todos = listId ? await firebaseApi.getFilteredDocs('todos', 'listId', listId) : [];
+  let todos = listId ? await firebaseApi.getEqualToDocs('todos', 'listId', listId) : [];
   dispatch({ type: 'GET_TODOS', payload: { todos } });
 }
 
 export async function getFavoriteTodos(dispatch) {
-  const todos = await firebaseApi.getFilteredDocs('todos', 'favorite', true);
+  const todos = await firebaseApi.getEqualToDocs('todos', 'favorite', true);
+  dispatch({ type: 'GET_TODOS', payload: { todos } });
+}
+
+export async function getPlannedTodos(dispatch) {
+  const todos = await firebaseApi.getNotEqualDocs('todos', 'dueDate', false);
   dispatch({ type: 'GET_TODOS', payload: { todos } });
 }
 

@@ -13,6 +13,7 @@ export { ListSection } from './ListSection';
 export { NavListItem } from './NavListItem';
 export { MainList } from './MainList';
 export { FavoriteList } from './FavoriteList';
+export { PlannedList } from './PlannedList';
 export { TodoSection } from './TodoSection';
 export { TodoList } from './TodoList';
 export { TodoListItem } from './TodoListItem';
