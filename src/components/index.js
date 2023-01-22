@@ -17,7 +17,7 @@ export { PlannedList } from './PlannedList';
 export { TodoSection } from './TodoSection';
 export { TodoList } from './TodoList';
 export { TodoListItem } from './TodoListItem';
-export { TodoForm } from './TodoForm';
+export { ListItemForm } from './ListItemForm';
 export { TodoDetails } from './TodoDetails';
 export { UserAuthForm } from './UserAuthForm';
 export { Modal } from './Modal';

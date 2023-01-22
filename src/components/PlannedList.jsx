@@ -24,10 +24,7 @@ export function PlannedList() {
       listId: '',
       userId: user.uid,
       title,
-      favorite: false,
-      description: '',
       dueDate: new Date(),
-      steps: [],
     });
   };
 

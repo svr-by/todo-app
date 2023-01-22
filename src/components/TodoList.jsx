@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { StateContext } from '../store';
-import { TodoForm, TodoListItem, TodoDetails, Spinner } from './index';
+import { ListItemForm, TodoListItem, TodoDetails, Spinner } from './index';
 
 export function TodoList({ isLoading, onSubmit }) {
   const {
@@ -17,9 +17,7 @@ export function TodoList({ isLoading, onSubmit }) {
     todo.id === selectedTodoId ? setSelectedTodoId(null) : setSelectedTodoId(todo.id);
   };
 
-  const findTodo = (todoId) => {
-    return todos.find((todo) => todo.id === todoId);
-  };
+  const selectedTodo = selectedTodoId && todos.find((todo) => todo.id === selectedTodoId);
 
   const uncompletedTodos = todos.filter((todo) => !todo.completed);
 
@@ -34,7 +32,7 @@ export function TodoList({ isLoading, onSubmit }) {
           {uncompletedTodos.map((todo) => (
             <TodoListItem key={todo.id} todo={todo} onSelect={handleSelect} />
           ))}
-          <TodoForm onSubmit={onSubmit} />
+          <ListItemForm onSubmit={onSubmit} placeholder="New todo" />
         </ul>
         {completedTodos.length ? (
           <>
@@ -47,7 +45,7 @@ export function TodoList({ isLoading, onSubmit }) {
           </>
         ) : null}
       </div>
-      <TodoDetails todo={findTodo(selectedTodoId)} onClose={handleClose} />
+      <TodoDetails todo={selectedTodo} onClose={handleClose} />
     </div>
   );
 }

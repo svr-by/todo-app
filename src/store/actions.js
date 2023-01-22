@@ -28,6 +28,16 @@ export async function getLists(dispatch) {
   dispatch({ type: 'GET_LISTS', payload: { lists } });
 }
 
+export async function createList(dispatch, listData) {
+  const list = await firebaseApi.createDoc('lists', { ...listData });
+  dispatch({ type: 'CREATE_LIST', payload: { list } });
+}
+
+export async function deleteList(dispatch, listId) {
+  await firebaseApi.deleteDocById('lists', listId);
+  dispatch({ type: 'DELETE_LIST', payload: { listId } });
+}
+
 export async function getMainTodos(dispatch) {
   const todos = await firebaseApi.getEqualToDocs('todos', 'listId', '');
   dispatch({ type: 'GET_TODOS', payload: { todos } });
@@ -49,10 +59,7 @@ export async function getPlannedTodos(dispatch) {
 }
 
 export async function createTodo(dispatch, todoData) {
-  const todo = await firebaseApi.createDoc('todos', {
-    ...todoData,
-    completed: false,
-  });
+  const todo = await firebaseApi.createDoc('todos', { ...todoData });
   dispatch({ type: 'CREATE_TODO', payload: { todo } });
 }
 

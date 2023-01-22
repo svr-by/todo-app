@@ -1,14 +1,25 @@
 import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../store';
-import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon, NavListItem } from './index';
+import {
+  HomeIcon,
+  PlanedIcon,
+  StarIcon,
+  ListIcon,
+  SignOutIcon,
+  NavListItem,
+  ListItemForm,
+} from './index';
 import * as ROUTES from '../constants/routes';
 
 export function ListSection() {
   const {
-    state: { lists, user },
+    state: { todos, lists, user },
     dispatch,
     actions,
   } = useContext(StateContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     actions.getLists(dispatch);
@@ -22,6 +33,18 @@ export function ListSection() {
 
   const handleSigout = () => {
     actions.signOut();
+  };
+
+  const handleSubmit = (title) => {
+    actions.createList(dispatch, { title });
+  };
+
+  const handleDelete = (listId) => {
+    for (let todo of todos) {
+      actions.deleteTodo(dispatch, todo.id);
+    }
+    actions.deleteList(dispatch, listId);
+    navigate(ROUTES.MAIN);
   };
 
   return (
@@ -45,8 +68,9 @@ export function ListSection() {
             icon: <ListIcon className="w-4 h-4" />,
           }))
           .map((list) => (
-            <NavListItem key={list.id} list={list} />
+            <NavListItem key={list.id} list={list} onDelete={handleDelete} />
           ))}
+        <ListItemForm onSubmit={handleSubmit} placeholder="New list" />
       </ul>
     </section>
   );

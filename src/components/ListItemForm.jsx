@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { PlusIcon } from '../components/index';
+import { PlusIcon } from './index';
 
-export function TodoForm({ onSubmit }) {
+export function ListItemForm({ onSubmit, placeholder = '' }) {
   const [title, setTitle] = useState('');
 
   const onChange = (e) => {
@@ -16,14 +16,14 @@ export function TodoForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-1 p-2 flex items-center bg-slate-100">
+    <form onSubmit={handleSubmit} className="p-2 flex items-center bg-white">
       <PlusIcon className="w-4 h-4 mr-4" />
       <input
         type="text"
         value={title}
         onChange={onChange}
         className="w-full border-0 outline-0 bg-inherit"
-        placeholder="Add a new todo"
+        placeholder={placeholder}
       />
     </form>
   );

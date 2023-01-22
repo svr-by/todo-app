@@ -25,9 +25,6 @@ export function FavoriteList() {
       userId: user.uid,
       title,
       favorite: true,
-      description: '',
-      dueDate: null,
-      steps: [],
     });
   };
 

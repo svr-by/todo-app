@@ -31,9 +31,6 @@ export function MainList() {
       listId: listId || '',
       userId: user.uid,
       title,
-      description: '',
-      dueDate: null,
-      steps: [],
     });
   };
 

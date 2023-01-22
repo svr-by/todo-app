@@ -6,6 +6,10 @@ export default function reducer(state, action) {
       return { ...state, user: null, isLoading: false };
     case 'GET_LISTS':
       return { ...state, lists: [...action.payload.lists] };
+    case 'CREATE_LIST':
+      return { ...state, lists: [...state.lists, action.payload.list] };
+    case 'DELETE_LIST':
+      return { ...state, lists: state.lists.filter((list) => list.id !== action.payload.listId) };
     case 'GET_TODOS':
       return { ...state, todos: [...action.payload.todos] };
     case 'CREATE_TODO':

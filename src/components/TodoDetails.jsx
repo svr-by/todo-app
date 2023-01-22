@@ -15,6 +15,10 @@ export function TodoDetails({ todo, onClose }) {
           </button>
           <p className="font-bold">Title:</p>
           <p>{todo?.title}</p>
+          <p className="font-bold">Description:</p>
+          <p>{todo?.description || ''}</p>
+          <p className="font-bold">List:</p>
+          <p>{todo?.listId || ''}</p>
           <p className="font-bold">Status:</p>
           <p>{todo?.completed ? 'completed' : 'uncompleted'}</p>
           <p className="font-bold">Favorite:</p>
