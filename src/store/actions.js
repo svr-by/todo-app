@@ -34,6 +34,10 @@ export async function createList(dispatch, listData) {
 }
 
 export async function deleteList(dispatch, listId) {
+  let listTodos = await firebaseApi.getEqualToDocs('todos', 'listId', listId);
+  for (let todo of listTodos) {
+    firebaseApi.deleteDocById('todos', todo.id);
+  }
   await firebaseApi.deleteDocById('lists', listId);
   dispatch({ type: 'DELETE_LIST', payload: { listId } });
 }

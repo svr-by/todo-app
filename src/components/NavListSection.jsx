@@ -7,7 +7,7 @@ import * as ROUTES from '../constants/routes';
 
 export function NavListSection() {
   const {
-    state: { todos, lists, user },
+    state: { lists, user },
     dispatch,
     actions,
   } = useContext(StateContext);
@@ -33,9 +33,6 @@ export function NavListSection() {
   };
 
   const handleDelete = (listId) => {
-    for (let todo of todos) {
-      actions.deleteTodo(dispatch, todo.id);
-    }
     actions.deleteList(dispatch, listId);
     navigate(ROUTES.MAIN);
   };
