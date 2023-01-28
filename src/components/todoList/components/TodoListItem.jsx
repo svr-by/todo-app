@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { StateContext } from '../../../store';
 import { DeleteIcon, StarIcon } from '../../icons';
+import { formatedDate } from '../../../core/utils';
 
 export function TodoListItem({ todo, onSelect, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);
@@ -15,6 +16,11 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
     actions.updateTodo(dispatch, todo.id, { favorite });
   };
 
+  const checkDueDate = () => {
+    const isExpired = Date.parse(todo.dueDate) < Date.now();
+    return isExpired ? 'text-red-600' : '';
+  };
+
   return (
     <li className="group/item p-2 flex items-center bg-white rounded hover:bg-slate-100">
       <input
@@ -24,12 +30,17 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
         onChange={handleUpdateStatus}
       />
       <span
-        className="grow cursor-pointer peer-checked:line-through peer-checked:text-gray-400"
+        className={`${checkDueDate()} grow cursor-pointer peer-checked:line-through peer-checked:text-gray-400`}
         onClick={() => onSelect(todo)}
       >
         {todo.title}
       </span>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
+        {todo.dueDate && (
+          <p className={`${checkDueDate()} invisible group-hover/item:visible text-xs`}>
+            {formatedDate(todo.dueDate)}
+          </p>
+        )}
         <DeleteIcon
           className="w-4 h-4 cursor-pointer invisible group-hover/item:visible hover:stroke-violet-600"
           onClick={() => onDelete(todo.id)}

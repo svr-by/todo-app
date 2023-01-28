@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { StateContext } from '../store';
 import { Outlet, Navigate } from 'react-router-dom';
 import { NavListSection, TodoSection } from '../components/index';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../core/routes';
 
 export function MainPage() {
   const {

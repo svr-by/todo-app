@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { MainList, FavoriteList, PlannedList } from '../components';
 import { SignInPage, SignUpPage, MainPage, LandingPage, NotFoundPage } from '../pages';
 import { StateContext, initialState, reducer, actions } from '../store';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../core/routes';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { StateContext } from '../store';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAuthForm } from '../components';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../core/routes';
 
 export function SignInPage() {
   const [errorMes, setErrorMes] = useState(null);

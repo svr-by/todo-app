@@ -1,5 +1,7 @@
+import { createInputId } from '../../../core/utils';
+
 export function TodoSelect({ options, value, label, onChange }) {
-  const id = `todo_${label.split(' ').join('_')}`;
+  const id = createInputId(label);
 
   const handleChange = (e) => {
     onChange(e.target.value);

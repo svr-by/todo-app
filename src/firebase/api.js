@@ -9,6 +9,7 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  orderBy,
 } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
@@ -17,6 +18,10 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { db, auth } from './config';
+
+function transformDocs(querySnapshot) {
+  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}
 
 export function signUpFirebase(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
@@ -34,21 +39,31 @@ export function onAuthFirebase(handlerAuth) {
   return onAuthStateChanged(auth, handlerAuth);
 }
 
-export async function getCollectionDocs(collectionTitle) {
-  const querySnapshot = await getDocs(collection(db, collectionTitle));
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+export async function getCollectionDocs(collectionTitle, orderField = 'created') {
+  const q = query(collection(db, collectionTitle), orderBy(orderField));
+  const querySnapshot = await getDocs(q);
+  return transformDocs(querySnapshot);
 }
 
-export async function getEqualToDocs(collectionTitle, field, fieldValue) {
-  const q = query(collection(db, collectionTitle), where(field, '==', fieldValue));
+export async function getEqualToDocs(collectionTitle, field, fieldValue, orderField = 'created') {
+  const q = query(
+    collection(db, collectionTitle),
+    where(field, '==', fieldValue),
+    orderBy(orderField)
+  );
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return transformDocs(querySnapshot);
 }
 
-export async function getNotEqualDocs(collectionTitle, field, fieldValue) {
-  const q = query(collection(db, collectionTitle), where(field, '!=', fieldValue));
+export async function getNotEqualDocs(collectionTitle, field, fieldValue, orderField = 'created') {
+  const q = query(
+    collection(db, collectionTitle),
+    where(field, '!=', fieldValue),
+    orderBy(field),
+    orderBy(orderField)
+  );
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return transformDocs(querySnapshot);
 }
 
 export async function createDoc(collectionTitle, data) {

@@ -4,6 +4,7 @@ import { Button, Toggle } from '../../index';
 import { DeleteIcon, StarIcon, CrossIcon } from '../../icons';
 import { TodoInput } from './TodoInput';
 import { TodoSelect } from './TodoSelect';
+import { formatedDate } from '../../../core/utils';
 
 export function TodoDetails({ todo, lists, onClose, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);
@@ -17,7 +18,7 @@ export function TodoDetails({ todo, lists, onClose, onDelete }) {
   useEffect(() => {
     setTitle(todo?.title || '');
     setDescription(todo?.description || '');
-    setDueDate(todo?.dueDate || '');
+    setDueDate(todo?.dueDate || null);
     setListId(todo?.listId || '');
     setCompleted(todo?.completed || false);
   }, [todo]);
@@ -64,6 +65,11 @@ export function TodoDetails({ todo, lists, onClose, onDelete }) {
             <TodoSelect label="List" options={lists} value={listId} onChange={setListId} />
             <Toggle label="Completed" value={completed} onChange={setCompleted} />
           </form>
+          {todo.created && (
+            <p className="block mb-4 text-xs text-gray-500 uppercase dark:text-white">
+              Created: {formatedDate(todo.created)}
+            </p>
+          )}
           <Button form="details_form" type="submit">
             Save
           </Button>

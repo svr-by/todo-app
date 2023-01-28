@@ -29,7 +29,7 @@ export async function getLists(dispatch) {
 }
 
 export async function createList(dispatch, listData) {
-  const list = await firebaseApi.createDoc('lists', { ...listData });
+  const list = await firebaseApi.createDoc('lists', { ...listData, created: Date.now() });
   dispatch({ type: 'CREATE_LIST', payload: { list } });
 }
 
@@ -63,7 +63,7 @@ export async function getPlannedTodos(dispatch) {
 }
 
 export async function createTodo(dispatch, todoData) {
-  const todo = await firebaseApi.createDoc('todos', { ...todoData });
+  const todo = await firebaseApi.createDoc('todos', { ...todoData, created: Date.now() });
   dispatch({ type: 'CREATE_TODO', payload: { todo } });
 }
 

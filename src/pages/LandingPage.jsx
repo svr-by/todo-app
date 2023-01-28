@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../core/routes';
 
 export function LandingPage() {
   return (

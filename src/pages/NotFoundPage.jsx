@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components';
 import NotFoundImg from '../assets/img/404.png';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../core/routes';
 
 export function NotFoundPage() {
   const navigate = useNavigate();
