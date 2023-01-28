@@ -5,7 +5,7 @@ import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon } from './icons';
 import { NavListItem, ListItemForm } from './index';
 import * as ROUTES from '../constants/routes';
 
-export function ListSection() {
+export function NavListSection() {
   const {
     state: { todos, lists, user },
     dispatch,

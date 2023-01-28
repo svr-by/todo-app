@@ -1,5 +1,4 @@
-export { Button } from './Button';
-export { ListSection } from './ListSection';
+export { NavListSection } from './NavListSection';
 export { NavListItem } from './NavListItem';
 export { MainList } from './MainList';
 export { FavoriteList } from './FavoriteList';
@@ -8,6 +7,8 @@ export { TodoSection } from './TodoSection';
 export { TodoList } from './todoList/TodoList';
 export { ListItemForm } from './ListItemForm';
 export { UserAuthForm } from './UserAuthForm';
+export { Button } from './Button';
 export { Modal } from './Modal';
 export { Spinner } from './Spinner';
 export { Toggle } from './Toggle';
+export { ErrorBoundary } from './ErrorBoundary';

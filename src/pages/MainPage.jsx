@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { StateContext } from '../store';
 import { Outlet, Navigate } from 'react-router-dom';
-import { ListSection, TodoSection } from '../components/index';
+import { NavListSection, TodoSection } from '../components/index';
 import * as ROUTES from '../constants/routes';
 
 export function MainPage() {
@@ -15,7 +15,7 @@ export function MainPage() {
     <Navigate to={ROUTES.SIGN_IN} replace={true} />
   ) : (
     <div className="min-h-screen flex gap-4">
-      <ListSection />
+      <NavListSection />
       <TodoSection>
         <Outlet />
       </TodoSection>
