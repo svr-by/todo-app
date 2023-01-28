@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { StateContext } from '../store';
 import { DeleteIcon, StarIcon } from './index';
 
-export function TodoListItem({ todo, onSelect }) {
+export function TodoListItem({ todo, onSelect, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);
 
   const handleUpdateStatus = () => {
@@ -13,10 +13,6 @@ export function TodoListItem({ todo, onSelect }) {
   const handleUpdateFavorite = () => {
     const favorite = !todo.favorite;
     actions.updateTodo(dispatch, todo.id, { favorite });
-  };
-
-  const handleDelete = () => {
-    actions.deleteTodo(dispatch, todo.id);
   };
 
   return (
@@ -36,7 +32,7 @@ export function TodoListItem({ todo, onSelect }) {
       <div className="flex gap-4">
         <DeleteIcon
           className="w-4 h-4 cursor-pointer invisible group-hover/item:visible hover:stroke-violet-600"
-          onClick={handleDelete}
+          onClick={() => onDelete(todo.id)}
         />
         <StarIcon
           className={`w-4 h-4 cursor-pointer ${

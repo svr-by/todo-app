@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { StateContext } from '../store';
 import { TodoInput, TodoSelect, Button, DeleteIcon, StarIcon, CrossIcon, Toggle } from './index';
 
-export function TodoDetails({ todo, lists, onClose }) {
+export function TodoDetails({ todo, lists, onClose, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);
 
   const [title, setTitle] = useState();
@@ -18,10 +18,6 @@ export function TodoDetails({ todo, lists, onClose }) {
     setListId(todo?.listId || '');
     setCompleted(todo?.completed || false);
   }, [todo]);
-
-  const handleDelete = () => {
-    actions.deleteTodo(dispatch, todo.id);
-  };
 
   const handleUpdateFavorite = () => {
     const favorite = !todo.favorite;
@@ -49,7 +45,7 @@ export function TodoDetails({ todo, lists, onClose }) {
             />
             <DeleteIcon
               className="w-4 h-4 cursor-pointer hover:stroke-violet-600"
-              onClick={handleDelete}
+              onClick={() => onDelete(todo.id)}
             />
           </div>
           <form id="details_form" className="grow" onSubmit={handleSubmit} noValidate>

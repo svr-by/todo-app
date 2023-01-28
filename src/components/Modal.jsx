@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { CrossIcon } from './icons/CrossIcon';
 
-export function Modal({ isOpen, onClose, children }) {
+export function Modal({ onClose, children }) {
   const portalRef = useRef(null);
 
   if (!portalRef.current) {
@@ -40,5 +40,5 @@ export function Modal({ isOpen, onClose, children }) {
     </div>
   );
 
-  return <>{isOpen && createPortal(modal, portal)}</>;
+  return createPortal(modal, portal);
 }
