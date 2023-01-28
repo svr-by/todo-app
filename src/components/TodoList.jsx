@@ -4,7 +4,7 @@ import { ListItemForm, TodoListItem, TodoDetails, Spinner } from './index';
 
 export function TodoList({ isLoading, onSubmit }) {
   const {
-    state: { todos },
+    state: { lists, todos },
   } = useContext(StateContext);
 
   const [selectedTodoId, setSelectedTodoId] = useState(null);
@@ -45,7 +45,7 @@ export function TodoList({ isLoading, onSubmit }) {
           </>
         ) : null}
       </div>
-      <TodoDetails todo={selectedTodo} onClose={handleClose} />
+      <TodoDetails todo={selectedTodo} lists={lists} onClose={handleClose} />
     </div>
   );
 }
