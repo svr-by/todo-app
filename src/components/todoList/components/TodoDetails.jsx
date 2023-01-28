@@ -1,6 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import { StateContext } from '../store';
-import { TodoInput, TodoSelect, Button, DeleteIcon, StarIcon, CrossIcon, Toggle } from './index';
+import { StateContext } from '../../../store';
+import { Button, Toggle } from '../../index';
+import { DeleteIcon, StarIcon, CrossIcon } from '../../icons';
+import { TodoInput } from './TodoInput';
+import { TodoSelect } from './TodoSelect';
 
 export function TodoDetails({ todo, lists, onClose, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);

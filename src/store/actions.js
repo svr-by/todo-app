@@ -1,4 +1,4 @@
-import * as firebaseApi from '../api/firebaseApi';
+import * as firebaseApi from '../firebase/api';
 
 export async function signUp(email, password) {
   return firebaseApi.signUpFirebase(email, password);

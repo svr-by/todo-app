@@ -1,15 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../store';
-import {
-  HomeIcon,
-  PlanedIcon,
-  StarIcon,
-  ListIcon,
-  SignOutIcon,
-  NavListItem,
-  ListItemForm,
-} from './index';
+import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon } from './icons';
+import { NavListItem, ListItemForm } from './index';
 import * as ROUTES from '../constants/routes';
 
 export function ListSection() {

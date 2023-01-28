@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { StateContext } from '../store';
-import { DeleteIcon, StarIcon } from './index';
+import { StateContext } from '../../../store';
+import { DeleteIcon, StarIcon } from '../../icons';
 
 export function TodoListItem({ todo, onSelect, onDelete }) {
   const { dispatch, actions } = useContext(StateContext);

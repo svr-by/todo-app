@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
-import { StateContext } from '../store';
-import { ListItemForm, TodoListItem, TodoDetails, Spinner, Modal, Button } from './index';
+import { StateContext } from '../../store';
+import { Spinner, Modal, Button, ListItemForm } from '../index';
+import { TodoListItem } from './components/TodoListItem';
+import { TodoDetails } from './components/TodoDetails';
 
 export function TodoList({ isLoading, onSubmit }) {
   const {

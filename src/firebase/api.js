@@ -16,7 +16,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { db, auth } from '../firebase';
+import { db, auth } from './config';
 
 export function signUpFirebase(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
