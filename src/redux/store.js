@@ -9,4 +9,8 @@ export const store = configureStore({
     lists,
     todos,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

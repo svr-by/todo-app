@@ -1,13 +1,10 @@
-import { useContext } from 'react';
-import { StateContext } from '../store';
+import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
 import { NavListSection, TodoSection } from '../components/index';
 import * as ROUTES from '../core/routes';
 
 export function MainPage() {
-  const {
-    state: { isLoading, user },
-  } = useContext(StateContext);
+  const { isLoading, user } = useSelector((state) => state.user);
 
   return isLoading ? (
     <div className="h-screen flex justify-center items-center">Loading...</div>

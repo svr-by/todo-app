@@ -1,35 +1,40 @@
-import { useState, useEffect, useContext } from 'react';
-import { StateContext } from '../../../store';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateTodo } from '../../../redux/slices/todosSlice';
 import { Button, Toggle } from '../../index';
 import { DeleteIcon, StarIcon, CrossIcon } from '../../icons';
 import { TodoInput } from './TodoInput';
 import { TodoSelect } from './TodoSelect';
 import { formatedDate } from '../../../core/utils';
 
-export function TodoDetails({ todo, lists, onClose, onDelete }) {
-  const { dispatch, actions } = useContext(StateContext);
+export function TodoDetails({ todo, onClose, onDelete }) {
+  const dispatch = useDispatch();
 
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [dueDate, setDueDate] = useState();
-  const [listId, setListId] = useState();
-  const [completed, setCompleted] = useState();
+  const { lists } = useSelector((state) => state.lists);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState(null);
+  const [listId, setListId] = useState('');
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    setTitle(todo?.title || '');
-    setDescription(todo?.description || '');
-    setDueDate(todo?.dueDate || null);
-    setListId(todo?.listId || '');
-    setCompleted(todo?.completed || false);
+    setTitle(todo?.title);
+    setDescription(todo?.description);
+    setDueDate(todo?.dueDate);
+    setListId(todo?.listId);
+    setCompleted(todo?.completed);
   }, [todo]);
 
   const handleUpdateFavorite = () => {
     const favorite = !todo.favorite;
-    actions.updateTodo(dispatch, todo.id, { favorite });
+    dispatch(updateTodo({ todoId: todo.id, todoData: { favorite } }));
   };
 
   const handleSubmit = (e) => {
-    actions.updateTodo(dispatch, todo.id, { title, description, dueDate, listId, completed });
+    dispatch(
+      updateTodo({ todoId: todo.id, todoData: { title, description, dueDate, listId, completed } })
+    );
     e.preventDefault();
   };
 

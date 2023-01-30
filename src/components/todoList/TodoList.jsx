@@ -1,15 +1,14 @@
-import { useContext, useState } from 'react';
-import { StateContext } from '../../store';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTodo } from '../../redux/slices/todosSlice';
 import { Spinner, Modal, Button, ListItemForm } from '../index';
 import { TodoListItem } from './components/TodoListItem';
 import { TodoDetails } from './components/TodoDetails';
 
-export function TodoList({ isLoading, onSubmit }) {
-  const {
-    state: { lists, todos },
-    dispatch,
-    actions,
-  } = useContext(StateContext);
+export function TodoList({ onSubmit }) {
+  const dispatch = useDispatch();
+
+  const { todos, isLoading } = useSelector((state) => state.todos);
 
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [deletedTodoId, setDeletedTodoId] = useState(null);
@@ -34,7 +33,7 @@ export function TodoList({ isLoading, onSubmit }) {
   };
 
   const handleDelete = () => {
-    actions.deleteTodo(dispatch, deletedTodoId);
+    dispatch(deleteTodo(deletedTodoId));
     setModalOpen(false);
   };
 
@@ -73,12 +72,7 @@ export function TodoList({ isLoading, onSubmit }) {
           </>
         ) : null}
       </div>
-      <TodoDetails
-        todo={selectedTodo}
-        lists={lists}
-        onDelete={handleOpenModal}
-        onClose={handleCloseDetails}
-      />
+      <TodoDetails todo={selectedTodo} onDelete={handleOpenModal} onClose={handleCloseDetails} />
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
           <h2 className="mb-6 text-xl">Do you really want to delete the todo?</h2>

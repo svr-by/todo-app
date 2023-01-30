@@ -1,22 +1,25 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StateContext } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutFirebase } from '../firebase/api';
+import { getLists, createList, deleteList } from '../redux/slices/listsSlice';
 import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon } from './icons';
 import { NavListItem, ListItemForm } from './index';
 import * as ROUTES from '../core/routes';
 
 export function NavListSection() {
+  const dispatch = useDispatch();
+
   const {
-    state: { lists, user },
-    dispatch,
-    actions,
-  } = useContext(StateContext);
+    user: { user },
+    lists: { lists },
+  } = useSelector((state) => state);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    actions.getLists(dispatch);
-  }, [actions, dispatch]);
+    dispatch(getLists());
+  }, [dispatch]);
 
   const mainLists = [
     { title: 'main', icon: <HomeIcon className="w-4 h-4" />, to: ROUTES.MAIN },
@@ -25,15 +28,15 @@ export function NavListSection() {
   ];
 
   const handleSigout = () => {
-    actions.signOut();
+    signOutFirebase();
   };
 
   const handleSubmit = (title) => {
-    actions.createList(dispatch, { title });
+    dispatch(createList({ title }));
   };
 
   const handleDelete = (listId) => {
-    actions.deleteList(dispatch, listId);
+    dispatch(deleteList(listId));
     navigate(ROUTES.MAIN);
   };
 

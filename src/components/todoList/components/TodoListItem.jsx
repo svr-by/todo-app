@@ -1,19 +1,19 @@
-import { useContext } from 'react';
-import { StateContext } from '../../../store';
+import { useDispatch } from 'react-redux';
+import { updateTodo } from '../../../redux/slices/todosSlice';
 import { DeleteIcon, StarIcon } from '../../icons';
 import { formatedDate } from '../../../core/utils';
 
 export function TodoListItem({ todo, onSelect, onDelete }) {
-  const { dispatch, actions } = useContext(StateContext);
+  const dispatch = useDispatch();
 
   const handleUpdateStatus = () => {
     const completed = !todo.completed;
-    actions.updateTodo(dispatch, todo.id, { completed });
+    dispatch(updateTodo({ todoId: todo.id, todoData: { completed } }));
   };
 
   const handleUpdateFavorite = () => {
     const favorite = !todo.favorite;
-    actions.updateTodo(dispatch, todo.id, { favorite });
+    dispatch(updateTodo({ todoId: todo.id, todoData: { favorite } }));
   };
 
   const checkDueDate = () => {

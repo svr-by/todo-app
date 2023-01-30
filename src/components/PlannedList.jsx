@@ -1,37 +1,32 @@
-import { useContext, useState, useEffect } from 'react';
-import { StateContext } from '../store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPlannedTodos, createTodo } from '../redux/slices/todosSlice';
 import { TodoList } from './index';
 
 export function PlannedList() {
-  const {
-    state: { user },
-    dispatch,
-    actions,
-  } = useContext(StateContext);
+  const dispatch = useDispatch();
 
-  const [isLoading, setLoading] = useState(true);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    (async function () {
-      setLoading(true);
-      await actions.getPlannedTodos(dispatch);
-      setLoading(false);
-    })();
-  }, [actions, dispatch]);
+    dispatch(getPlannedTodos());
+  }, [dispatch]);
 
   const handleSubmit = (title) => {
-    actions.createTodo(dispatch, {
-      listId: '',
-      userId: user.uid,
-      title,
-      dueDate: new Date(),
-    });
+    dispatch(
+      createTodo({
+        listId: '',
+        userId: user.uid,
+        title,
+        dueDate: new Date(),
+      })
+    );
   };
 
   return (
     <>
       <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">Planned list</h2>
-      <TodoList isLoading={isLoading} onSubmit={handleSubmit} />
+      <TodoList onSubmit={handleSubmit} />
     </>
   );
 }

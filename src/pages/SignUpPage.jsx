@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
-import { StateContext } from '../store';
+import { useSelector } from 'react-redux';
+import { signUpFirebase } from '../firebase/api';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAuthForm } from '../components';
 import * as ROUTES from '../core/routes';
@@ -7,15 +8,12 @@ import * as ROUTES from '../core/routes';
 export function SignUpPage() {
   const [errorMes, setErrorMes] = useState(null);
 
-  const {
-    state: { user },
-    actions,
-  } = useContext(StateContext);
+  const { user } = useSelector((state) => state.user);
 
   const handleSubmit = async (email, password) => {
     if (errorMes) setErrorMes(null);
     try {
-      await actions.signUp(email, password);
+      await signUpFirebase(email, password);
     } catch (error) {
       switch (error.code) {
         case 'auth/email-already-in-use':

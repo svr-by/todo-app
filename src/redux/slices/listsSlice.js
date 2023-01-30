@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import * as firebaseApi from '../../firebase/api';
 
 const initialState = {
   lists: [],
@@ -39,7 +40,7 @@ const listsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteList.fulfilled, (state, action) => {
-        state.lists = state.lists.filter((list) => list.id !== action.payload.listId);
+        state.lists = state.lists.filter((list) => list.id !== action.payload);
         state.isLoading = false;
       })
       .addMatcher(isAnyOf(getLists.pending, createList.pending, deleteList.pending), (state) => {
