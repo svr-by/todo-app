@@ -73,27 +73,21 @@ const todosSlice = createSlice({
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         state.todos.push(action.payload);
-        state.isLoading = false;
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
         state.todos = state.todos.map((todo) =>
           todo.id === action.payload.todoId ? { ...todo, ...action.payload.todoData } : todo
         );
-        state.isLoading = false;
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.todos = state.todos.filter((todo) => todo.id !== action.payload);
-        state.isLoading = false;
       })
       .addMatcher(
         isAnyOf(
           getMainTodos.pending,
           getListTodos.pending,
           getFavoriteTodos.pending,
-          getPlannedTodos.pending,
-          createTodo.pending,
-          updateTodo.pending,
-          deleteTodo.pending
+          getPlannedTodos.pending
         ),
         (state) => {
           state.isLoading = true;

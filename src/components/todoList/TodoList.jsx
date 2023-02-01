@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo } from '../../redux/slices/todosSlice';
-import { Spinner, Modal, Button, ListItemForm } from '../index';
+import { Spinner, ConfModal, Button, ListItemForm } from '../index';
 import { TodoListItem } from './components/TodoListItem';
 import { TodoDetails } from './components/TodoDetails';
 
@@ -73,15 +73,12 @@ export function TodoList({ onSubmit }) {
         ) : null}
       </div>
       <TodoDetails todo={selectedTodo} onDelete={handleOpenModal} onClose={handleCloseDetails} />
-      {isModalOpen && (
-        <Modal onClose={handleCloseModal}>
-          <h2 className="mb-6 text-xl">Do you really want to delete the todo?</h2>
-          <div className="flex justify-center gap-4">
-            <Button onClick={handleDelete}>Yes</Button>
-            <Button onClick={handleCloseModal}>No</Button>
-          </div>
-        </Modal>
-      )}
+      <ConfModal
+        message={'Do you really want to delete the todo?'}
+        isOpen={isModalOpen}
+        handleConfirm={handleDelete}
+        handleReject={handleCloseModal}
+      />
     </div>
   );
 }

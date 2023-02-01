@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
-import { NavListSection, TodoSection } from '../components/index';
+import { NavListSection, Spinner, TodoSection } from '../components/index';
 import * as ROUTES from '../core/routes';
 
 export function MainPage() {
   const { isLoading, user } = useSelector((state) => state.user);
 
   return isLoading ? (
-    <div className="h-screen flex justify-center items-center">Loading...</div>
+    <div className="h-screen flex justify-center items-center">
+      <Spinner />
+    </div>
   ) : !user ? (
     <Navigate to={ROUTES.SIGN_IN} replace={true} />
   ) : (

@@ -16,26 +16,34 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
     dispatch(updateTodo({ todoId: todo.id, todoData: { favorite } }));
   };
 
+  const handleSelect = (e) => {
+    if (e.target.tagName !== 'INPUT' && !e.target.closest('.icons')) {
+      onSelect(todo);
+    }
+  };
+
   const checkDueDate = () => {
     const isExpired = Date.parse(todo.dueDate) < Date.now();
     return isExpired ? 'text-red-600' : '';
   };
 
   return (
-    <li className="group/item p-2 flex items-center bg-white rounded hover:bg-slate-100">
+    <li
+      className="group/item p-2 flex items-center bg-white rounded cursor-pointer hover:bg-slate-100"
+      onClick={handleSelect}
+    >
       <input
         type="checkbox"
-        className="peer mr-4"
+        className="peer w-5 h-5 mr-4"
         checked={todo.completed}
         onChange={handleUpdateStatus}
       />
       <span
-        className={`${checkDueDate()} grow cursor-pointer peer-checked:line-through peer-checked:text-gray-400`}
-        onClick={() => onSelect(todo)}
+        className={`${checkDueDate()} grow peer-checked:line-through peer-checked:text-gray-400`}
       >
         {todo.title}
       </span>
-      <div className="flex gap-4 items-center">
+      <div className="icons flex gap-4 items-center">
         {todo.dueDate && (
           <p className={`${checkDueDate()} invisible group-hover/item:visible text-xs`}>
             {formatedDate(todo.dueDate)}

@@ -19,11 +19,11 @@ export function TodoDetails({ todo, onClose, onDelete }) {
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    setTitle(todo?.title);
-    setDescription(todo?.description);
-    setDueDate(todo?.dueDate);
-    setListId(todo?.listId);
-    setCompleted(todo?.completed);
+    setTitle(todo?.title || '');
+    setDescription(todo?.description || '');
+    setDueDate(todo?.dueDate || null);
+    setListId(todo?.listId || '');
+    setCompleted(todo?.completed || false);
   }, [todo]);
 
   const handleUpdateFavorite = () => {
@@ -68,7 +68,7 @@ export function TodoDetails({ todo, onClose, onDelete }) {
             />
             <TodoInput label="Due date" type="date" value={dueDate} onChange={setDueDate} />
             <TodoSelect label="List" options={lists} value={listId} onChange={setListId} />
-            <Toggle label="Completed" value={completed} onChange={setCompleted} />
+            <Toggle label="Completed" checked={completed} onChange={setCompleted} />
           </form>
           {todo.created && (
             <p className="block mb-4 text-xs text-gray-500 uppercase dark:text-white">
