@@ -1,30 +1,26 @@
-import { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { signUpFirebase } from '../firebase/api';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAuthForm } from '../components';
 import * as ROUTES from '../core/routes';
 
 export function SignUpPage() {
-  const [errorMes, setErrorMes] = useState(null);
-
   const { user } = useSelector((state) => state.user);
 
   const handleSubmit = async (email, password) => {
-    if (errorMes) setErrorMes(null);
     try {
       await signUpFirebase(email, password);
     } catch (error) {
       switch (error.code) {
         case 'auth/email-already-in-use':
-          setErrorMes('User with this email already exists!');
+          toast.error('User with this email already exists!');
           break;
         case 'auth/weak-password!':
-          setErrorMes('Weak password!');
+          toast.error('Weak password!');
           break;
         default:
-          setErrorMes(`Sorry, unexpected error: ${error.code}!`);
-          console.log(error);
+          toast.error('Sorry, unexpected error!');
       }
     }
   };
@@ -45,11 +41,6 @@ export function SignUpPage() {
           landing page.
         </Link>
       </p>
-      {errorMes && (
-        <p className="block py-2 px-4 text-l font-medium text-white bg-red-600 rounded">
-          {errorMes}
-        </p>
-      )}
     </div>
   );
 }

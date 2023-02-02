@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import * as firebaseApi from '../../firebase/api';
 
 const initialState = {
@@ -22,6 +23,7 @@ export const deleteList = createAsyncThunk('lists/deleteList', async (listId, us
     firebaseApi.deleteDocById('todos', todo.id);
   }
   await firebaseApi.deleteDocById('lists', listId);
+  toast.success(`List was deleted!`);
   return listId;
 });
 

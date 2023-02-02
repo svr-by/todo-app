@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { updateTodo } from '../../../redux/slices/todosSlice';
 import { Button, Toggle } from '../../index';
 import { DeleteIcon, StarIcon, CrossIcon } from '../../icons';
@@ -35,6 +36,7 @@ export function TodoDetails({ todo, onClose, onDelete }) {
     dispatch(
       updateTodo({ todoId: todo.id, todoData: { title, description, dueDate, listId, completed } })
     );
+    toast.success(`Todo was updated!`);
     e.preventDefault();
   };
 

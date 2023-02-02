@@ -1,30 +1,26 @@
-import { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { signInFirebase } from '../firebase/api';
 import { Link, Navigate } from 'react-router-dom';
 import { UserAuthForm } from '../components';
 import * as ROUTES from '../core/routes';
 
 export function SignInPage() {
-  const [errorMes, setErrorMes] = useState(null);
-
   const { user } = useSelector((state) => state.user);
 
   const handleSubmit = async (email, password) => {
-    if (errorMes) setErrorMes(null);
     try {
       await signInFirebase(email, password);
     } catch (error) {
       switch (error.code) {
         case 'auth/user-not-found':
-          setErrorMes('User not found!');
+          toast.error('User not found!');
           break;
         case 'auth/wrong-password':
-          setErrorMes('Wrong password!');
+          toast.error('Wrong password!');
           break;
         default:
-          setErrorMes(`Sorry, unexpected error: ${error.code}!`);
-          console.log(error);
+          toast.error('Sorry, unexpected error!');
       }
     }
   };
@@ -47,11 +43,6 @@ export function SignInPage() {
           landing page.
         </Link>
       </p>
-      {errorMes && (
-        <p className="block py-2 px-4 text-l font-medium text-white bg-red-600 rounded">
-          {errorMes}
-        </p>
-      )}
     </div>
   );
 }
