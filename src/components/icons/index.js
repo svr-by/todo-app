@@ -8,3 +8,5 @@ export { PlusIcon } from './PlusIcon';
 export { EmailIcon } from './EmailIcon';
 export { PasswordIcon } from './PasswordIcon';
 export { SignOutIcon } from './SignOutIcon';
+export { GithubIcon } from './GithubIcon';
+export { LinkedinIcon } from './LinkedinIcon';
