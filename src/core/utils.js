@@ -1,6 +1,7 @@
 export function formatedDate(timeStamp) {
   const date = new Date(timeStamp);
-  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+  const month = date.getMonth() + 1;
+  return `${date.getFullYear()}-${month > 9 ? month : '0' + month}-${date.getDate()}`;
 }
 
 export function createInputId(label) {

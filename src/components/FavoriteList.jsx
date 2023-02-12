@@ -9,8 +9,8 @@ export function FavoriteList() {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getFavoriteTodos());
-  }, [dispatch]);
+    dispatch(getFavoriteTodos(user.uid));
+  }, [user.uid, dispatch]);
 
   const handleSubmit = (title) => {
     dispatch(

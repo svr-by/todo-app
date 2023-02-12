@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo } from '../../redux/slices/todosSlice';
-import { Spinner, ConfModal, Button, ListItemForm } from '../index';
+import { Spinner, ConfModal, ListItemForm } from '../index';
 import { TodoListItem } from './components/TodoListItem';
 import { TodoDetails } from './components/TodoDetails';
 
@@ -37,8 +37,9 @@ export function TodoList({ onSubmit }) {
     setModalOpen(false);
   };
 
-  const createTodoList = (list) => {
-    return list.map((todo) => (
+  const createTodoList = (todoList, sortField = 'created') => {
+    const sortedTodoList = todoList.sort((a, b) => a[sortField] - b[sortField]);
+    return sortedTodoList.map((todo) => (
       <TodoListItem
         key={todo.id}
         todo={todo}

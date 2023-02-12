@@ -16,11 +16,11 @@ export function MainList() {
 
   useEffect(() => {
     if (listId) {
-      dispatch(getListTodos(listId));
+      dispatch(getListTodos({ listId, userId: user.uid }));
     } else {
-      dispatch(getMainTodos());
+      dispatch(getMainTodos(user.uid));
     }
-  }, [listId, dispatch]);
+  }, [listId, user.uid, dispatch]);
 
   const handleSubmit = (title) => {
     dispatch(

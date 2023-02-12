@@ -8,16 +8,16 @@ const initialState = {
 };
 
 export const getLists = createAsyncThunk('lists/getLists', async (userId) => {
-  const lists = await firebaseApi.getCollectionDocs('lists');
-  return lists;
+  const lists = await firebaseApi.getEqualToDocs('lists', 'userId', userId);
+  return lists.sort((a, b) => a.created - b.created);
 });
 
-export const createList = createAsyncThunk('lists/createList', async (listData, userId) => {
+export const createList = createAsyncThunk('lists/createList', async (listData) => {
   const list = await firebaseApi.createDoc('lists', { ...listData, created: Date.now() });
   return list;
 });
 
-export const deleteList = createAsyncThunk('lists/deleteList', async (listId, userId) => {
+export const deleteList = createAsyncThunk('lists/deleteList', async (listId) => {
   let listTodos = await firebaseApi.getEqualToDocs('todos', 'listId', listId);
   for (let todo of listTodos) {
     firebaseApi.deleteDocById('todos', todo.id);
@@ -47,6 +47,9 @@ const listsSlice = createSlice({
       })
       .addMatcher(isAnyOf(getLists.pending, createList.pending, deleteList.pending), (state) => {
         state.isLoading = true;
+      })
+      .addMatcher(isAnyOf(getLists.rejected, createList.rejected, deleteList.rejected), (state) => {
+        state.isLoading = false;
       });
   },
 });

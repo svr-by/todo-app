@@ -21,8 +21,8 @@ export function NavListSection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getLists());
-  }, [dispatch]);
+    dispatch(getLists(user.uid));
+  }, [user.uid, dispatch]);
 
   const handleOpenModal = (listId) => {
     setModalOpen(true);
@@ -39,7 +39,7 @@ export function NavListSection() {
   };
 
   const handleSubmit = (title) => {
-    dispatch(createList({ title }));
+    dispatch(createList({ title, userId: user.uid }));
   };
 
   const handleDelete = () => {

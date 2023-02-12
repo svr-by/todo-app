@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { formatedDate } from '../core/utils';
 import { getPlannedTodos, createTodo } from '../redux/slices/todosSlice';
 import { TodoList } from './index';
 
@@ -9,8 +10,8 @@ export function PlannedList() {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getPlannedTodos());
-  }, [dispatch]);
+    dispatch(getPlannedTodos(user.uid));
+  }, [user.uid, dispatch]);
 
   const handleSubmit = (title) => {
     dispatch(
@@ -18,7 +19,7 @@ export function PlannedList() {
         listId: '',
         userId: user.uid,
         title,
-        dueDate: new Date(),
+        dueDate: formatedDate(Date.now()),
       })
     );
   };

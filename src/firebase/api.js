@@ -9,7 +9,6 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
-  orderBy,
 } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
@@ -39,29 +38,32 @@ export function onAuthFirebase(handlerAuth) {
   return onAuthStateChanged(auth, handlerAuth);
 }
 
-export async function getCollectionDocs(collectionTitle, orderField = 'created') {
-  const q = query(collection(db, collectionTitle), orderBy(orderField));
+export async function getCollectionDocs(collectionTitle) {
+  const q = query(collection(db, collectionTitle));
   const querySnapshot = await getDocs(q);
   return transformDocs(querySnapshot);
 }
 
-export async function getEqualToDocs(collectionTitle, field, fieldValue, orderField = 'created') {
-  const q = query(
-    collection(db, collectionTitle),
-    where(field, '==', fieldValue),
-    orderBy(orderField)
-  );
+export async function getEqualToDocs(collectionTitle, field, fieldValue, userId) {
+  const q = userId
+    ? query(
+        collection(db, collectionTitle),
+        where(field, '==', fieldValue),
+        where('userId', '==', userId)
+      )
+    : query(collection(db, collectionTitle), where(field, '==', fieldValue));
   const querySnapshot = await getDocs(q);
   return transformDocs(querySnapshot);
 }
 
-export async function getNotEqualDocs(collectionTitle, field, fieldValue, orderField = 'created') {
-  const q = query(
-    collection(db, collectionTitle),
-    where(field, '!=', fieldValue),
-    orderBy(field),
-    orderBy(orderField)
-  );
+export async function getNotEqualDocs(collectionTitle, field, fieldValue, userId) {
+  const q = userId
+    ? query(
+        collection(db, collectionTitle),
+        where(field, '!=', fieldValue),
+        where('userId', '==', userId)
+      )
+    : query(collection(db, collectionTitle), where(field, '!=', fieldValue));
   const querySnapshot = await getDocs(q);
   return transformDocs(querySnapshot);
 }

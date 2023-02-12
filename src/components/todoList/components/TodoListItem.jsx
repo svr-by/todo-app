@@ -23,7 +23,9 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
   };
 
   const checkDueDate = () => {
-    const isExpired = Date.parse(todo.dueDate) < Date.now();
+    const msPerDay = 86400000;
+    const isExpired =
+      Math.floor(Date.parse(todo.dueDate) / msPerDay) < Math.floor(Date.now() / msPerDay);
     return isExpired ? 'text-red-600' : '';
   };
 
@@ -39,13 +41,15 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
         onChange={handleUpdateStatus}
       />
       <span
-        className={`${checkDueDate()} grow peer-checked:line-through peer-checked:text-gray-400`}
+        className={`${checkDueDate()} max-w-[400px] mr-auto grow peer-checked:line-through peer-checked:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap`}
       >
         {todo.title}
       </span>
       <div className="icons flex gap-4 items-center">
         {todo.dueDate && (
-          <p className={`${checkDueDate()} invisible group-hover/item:visible text-xs`}>
+          <p
+            className={`${checkDueDate()} invisible group-hover/item:visible text-xs whitespace-nowrap`}
+          >
             {formatedDate(todo.dueDate)}
           </p>
         )}
