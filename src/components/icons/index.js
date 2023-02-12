@@ -10,3 +10,4 @@ export { PasswordIcon } from './PasswordIcon';
 export { SignOutIcon } from './SignOutIcon';
 export { GithubIcon } from './GithubIcon';
 export { LinkedinIcon } from './LinkedinIcon';
+export { DoneCircleIcon } from './DoneCircleIcon';

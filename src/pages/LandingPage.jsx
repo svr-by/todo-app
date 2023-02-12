@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { GithubIcon, LinkedinIcon } from '../components/icons';
+import Lottie from 'lottie-react';
+import animationData from '../assets/todo-list-animation.json';
+import { GithubIcon, LinkedinIcon, DoneCircleIcon } from '../components/icons';
 import * as ROUTES from '../core/routes';
 
 function FooterLink({ to, children }) {
@@ -26,28 +28,53 @@ function NavLink({ to, children }) {
   );
 }
 
+function BenefitList({ list }) {
+  return (
+    <ul className="mb-8">
+      {list.map((item, index) => (
+        <li key={index} className="flex gap-4 mb-4">
+          <DoneCircleIcon fill="#2a8a9d" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function LandingPage() {
   return (
     <div className="max-w-screen-xl min-h-screen mx-auto flex flex-col">
       <header className="py-6 px-4 flex">
         <div className="text-4xl font-bold mr-auto">
-          <Link to={ROUTES.MAIN}>Todo.app</Link>
+          <Link to={ROUTES.MAIN}>
+            Todo<span className="text-purple-700">.</span>app
+          </Link>
         </div>
         <nav className="flex items-center gap-4">
           <NavLink to={ROUTES.SIGN_IN}>Sign In</NavLink>
           <NavLink to={ROUTES.SIGN_UP}>Sign Up</NavLink>
         </nav>
       </header>
-      <main className="grow flex flex-col justify-center items-center">
-        <h1 className="mx-auto max-w-6xl mb-8 p-4 font-bold text-6xl text-center">
-          Organize your life and manage your team{'’'}s work with Todo.app
-        </h1>
-        <Link
-          to={ROUTES.MAIN}
-          className="px-6 py-3 bg-purple-700 rounded-2xl text-white uppercase hover:bg-purple-800"
-        >
-          Get started
-        </Link>
+      <main className="grow py-6 px-4 flex justify-between items-center">
+        <div className="mb-8 flex flex-col justify-start items-start">
+          <h1 className="max-w-2xl mb-8 py-4 font-bold text-4xl leading-normal">
+            Organize your work and life
+          </h1>
+          <BenefitList
+            list={[
+              'Add your tasks. Get organized',
+              'Achieve more every day',
+              'Reach that mental clarity you’ve been longing for',
+            ]}
+          />
+          <Link
+            to={ROUTES.MAIN}
+            className="block px-6 py-3 bg-purple-700 rounded-2xl text-white uppercase hover:bg-purple-800"
+          >
+            Get started
+          </Link>
+        </div>
+        <Lottie animationData={animationData} style={{ width: 600 }} />
       </main>
       <footer className="py-6 px-4 flex">
         <p className="mr-auto">© 2023 Siarhei Rachkouski</p>
