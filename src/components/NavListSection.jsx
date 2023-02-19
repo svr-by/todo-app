@@ -55,7 +55,7 @@ export function NavListSection() {
   ];
 
   return (
-    <section className="p-5 w-1/4 min-w-[300px]">
+    <section className="p-5 w-1/4 min-w-[300px] flex-col hidden md:flex">
       <h1 className="mb-4 text-3xl font-bold uppercase">To-do notes</h1>
       {user && (
         <div className="mb-4 flex gap-4 items-center text-slate-500">
@@ -63,22 +63,24 @@ export function NavListSection() {
           <SignOutIcon className="w-5 h-5 cursor-pointer hover:text-black" onClick={handleSigout} />
         </div>
       )}
-      <ul>
-        {mainLists.map((list) => (
-          <NavListItem key={list.title} list={list} />
-        ))}
-        <hr className="h-0.5 my-4 bg-slate-400" />
-        {lists
-          .map((list) => ({
-            ...list,
-            to: `${ROUTES.MAIN}/${list.id}`,
-            icon: <ListIcon className="w-4 h-4" />,
-          }))
-          .map((list) => (
-            <NavListItem key={list.id} list={list} onDelete={handleOpenModal} />
+      <div className="pr-3 overflow-y-auto scrollbar-thin scrollbar-thumb-violet-400 scrollbar-track-violet-100">
+        <ul>
+          {mainLists.map((list) => (
+            <NavListItem key={list.title} list={list} />
           ))}
-        <ListItemForm onSubmit={handleSubmit} placeholder="New list" />
-      </ul>
+          <hr className="h-0.5 my-4 bg-slate-400" />
+          {lists
+            .map((list) => ({
+              ...list,
+              to: `${ROUTES.MAIN}/${list.id}`,
+              icon: <ListIcon className="w-4 h-4" />,
+            }))
+            .map((list) => (
+              <NavListItem key={list.id} list={list} onDelete={handleOpenModal} />
+            ))}
+          <ListItemForm onSubmit={handleSubmit} placeholder="New list" />
+        </ul>
+      </div>
       <ConfModal
         message={'Do you really want to delete the list?'}
         isOpen={isModalOpen}

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavoriteTodos, createTodo } from '../redux/slices/todosSlice';
-import { TodoList } from './index';
+import { TodoList, TodoListTitle } from './index';
 
 export function FavoriteList() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export function FavoriteList() {
 
   return (
     <>
-      <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">Favorite list</h2>
+      <TodoListTitle title="Favorite list" />
       <TodoList onSubmit={handleSubmit} />
     </>
   );

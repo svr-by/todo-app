@@ -4,6 +4,33 @@ import animationData from '../assets/todo-list-animation.json';
 import { GithubIcon, LinkedinIcon, DoneCircleIcon } from '../components/icons';
 import * as ROUTES from '../core/routes';
 
+function NavLink({ to, children }) {
+  return (
+    <Link
+      to={to}
+      className="p-2 border border-purple-700 rounded-2xl text-purple-700 text-xs hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out md:px-4 md:text-base"
+    >
+      {children}
+    </Link>
+  );
+}
+
+function BenefitList({ list }) {
+  return (
+    <ul className="mb-8">
+      {list.map((item, index) => (
+        <li
+          key={index}
+          className="flex gap-4 mb-4 justify-center text-center md:justify-start md:text-left"
+        >
+          <DoneCircleIcon fill="#2a8a9d" className="flex gap-4 mb-4 hidden md:block" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function FooterLink({ to, children }) {
   return (
     <a
@@ -17,35 +44,11 @@ function FooterLink({ to, children }) {
   );
 }
 
-function NavLink({ to, children }) {
-  return (
-    <Link
-      to={to}
-      className="px-4 py-2 border border-purple-700 rounded-2xl text-purple-700 hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out"
-    >
-      {children}
-    </Link>
-  );
-}
-
-function BenefitList({ list }) {
-  return (
-    <ul className="mb-8">
-      {list.map((item, index) => (
-        <li key={index} className="flex gap-4 mb-4">
-          <DoneCircleIcon fill="#2a8a9d" />
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export function LandingPage() {
   return (
     <div className="max-w-screen-xl min-h-screen mx-auto flex flex-col">
       <header className="py-6 px-4 flex">
-        <div className="text-4xl font-bold mr-auto">
+        <div className="text-2xl font-bold mr-auto md:text-4xl">
           <Link to={ROUTES.MAIN}>
             Todo<span className="text-purple-700">.</span>app
           </Link>
@@ -55,9 +58,9 @@ export function LandingPage() {
           <NavLink to={ROUTES.SIGN_UP}>Sign Up</NavLink>
         </nav>
       </header>
-      <main className="grow py-6 px-4 flex justify-between items-center">
-        <div className="mb-8 flex flex-col justify-start items-start">
-          <h1 className="max-w-2xl mb-8 py-4 font-bold text-4xl leading-normal">
+      <main className="grow py-6 px-4 flex justify-between items-center flex-col md:flex-row">
+        <div className="mb-8 flex flex-col justify-start items-center md:items-start">
+          <h1 className="max-w-2xl mb-8 py-4 font-bold text-2xl leading-normal text-center md:text-left md:text-4xl">
             Organize your work and life
           </h1>
           <BenefitList
@@ -74,10 +77,10 @@ export function LandingPage() {
             Get started
           </Link>
         </div>
-        <Lottie animationData={animationData} style={{ width: 600 }} />
+        <Lottie animationData={animationData} className="w-4/5 md:w-[600px]" />
       </main>
-      <footer className="py-6 px-4 flex">
-        <p className="mr-auto">© 2023 Siarhei Rachkouski</p>
+      <footer className="py-6 px-4 flex items-center">
+        <p className="mr-auto text-xs md:text-base">© 2023 Siarhei Rachkouski</p>
         <div>
           <FooterLink to="https://github.com/svr-by/todo-app">
             <GithubIcon />

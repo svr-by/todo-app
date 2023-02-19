@@ -28,12 +28,12 @@ export function SignInPage() {
   return user ? (
     <Navigate to={ROUTES.MAIN} replace={true} />
   ) : (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-screen p-2 flex flex-col justify-center items-center">
       <h2 className="mb-4 text-center text-3xl font-semibold text-gray-900">
         Sign in to your account
       </h2>
       <UserAuthForm onSubmit={handleSubmit} submitBtn="Sign In" />
-      <p className="block mb-4 text-sm font-medium text-gray-700">
+      <p className="block mb-4 text-center text-sm font-medium text-gray-700">
         No account?{' '}
         <Link to={ROUTES.SIGN_UP} className="text-indigo-800 hover:text-indigo-600">
           Sign up!

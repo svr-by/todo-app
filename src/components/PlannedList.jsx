@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatedDate } from '../core/utils';
 import { getPlannedTodos, createTodo } from '../redux/slices/todosSlice';
-import { TodoList } from './index';
+import { TodoList, TodoListTitle } from './index';
 
 export function PlannedList() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export function PlannedList() {
 
   return (
     <>
-      <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">Planned list</h2>
+      <TodoListTitle title="Planned list" />
       <TodoList onSubmit={handleSubmit} />
     </>
   );

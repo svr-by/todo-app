@@ -23,7 +23,7 @@ export function UserAuthForm({ onSubmit, submitBtn }) {
   };
 
   return (
-    <div className="mb-4 p-6 w-[32rem] bg-white shadow-3xl">
+    <div className="mb-4 p-6 w-4/5 bg-white shadow-3xl md:w-[32rem]">
       <form onSubmit={handleSubmit} className="flex flex-col">
         <div>
           <label

@@ -41,7 +41,11 @@ export function TodoDetails({ todo, onClose, onDelete }) {
   };
 
   return (
-    <div className={`bg-white ease-in-out duration-500 ${todo ? 'w-1/4 min-w-[15rem]' : 'w-0'}`}>
+    <div
+      className={`bg-white ease-in-out duration-500 ${
+        todo ? 'w-full sm:w-1/4 sm:min-w-[15rem]' : 'w-0'
+      }`}
+    >
       {todo && (
         <aside className="relative h-full p-4 flex flex-col">
           <button className="absolute top-2 right-2" onClick={onClose}>

@@ -58,8 +58,8 @@ export function TodoList({ onSubmit }) {
   return isLoading ? (
     <Spinner />
   ) : (
-    <div className="flex grow">
-      <div className="grow">
+    <div className="flex grow overflow-y-auto scrollbar-thin scrollbar-thumb-violet-400 scrollbar-track-violet-100">
+      <div className={`grow ease-in-out duration-500 ${selectedTodo ? 'w-0 sm:w-auto' : 'w-full'}`}>
         <ul className="p-5 grow flex flex-col gap-1">
           {createTodoList(uncompletedTodos)}
           <ListItemForm onSubmit={onSubmit} placeholder="New todo" />

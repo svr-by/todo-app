@@ -5,6 +5,7 @@ export { FavoriteList } from './FavoriteList';
 export { PlannedList } from './PlannedList';
 export { TodoSection } from './TodoSection';
 export { TodoList } from './todoList/TodoList';
+export { TodoListTitle } from './TodoListTitle';
 export { ListItemForm } from './ListItemForm';
 export { UserAuthForm } from './UserAuthForm';
 export { Button } from './Button';

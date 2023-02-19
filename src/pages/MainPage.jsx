@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
-import { NavListSection, Spinner, TodoSection } from '../components/index';
+import { NavListSection, Spinner, TodoSection } from '../components';
 import * as ROUTES from '../core/routes';
 
 export function MainPage() {
@@ -13,7 +13,7 @@ export function MainPage() {
   ) : !user ? (
     <Navigate to={ROUTES.SIGN_IN} replace={true} />
   ) : (
-    <div className="min-h-screen flex gap-4">
+    <div className="h-screen overflow-hidden flex gap-4">
       <NavListSection />
       <TodoSection>
         <Outlet />

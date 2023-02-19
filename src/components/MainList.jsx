@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListTodos, getMainTodos, createTodo } from '../redux/slices/todosSlice';
-import { TodoList } from './index';
+import { TodoList, TodoListTitle } from './index';
 
 export function MainList() {
   const dispatch = useDispatch();
@@ -36,9 +36,7 @@ export function MainList() {
 
   return (
     <>
-      <h2 className="p-5 bg-violet-700 text-white text-xl uppercase">{`${
-        listId ? list?.title : 'Main'
-      } list`}</h2>
+      <TodoListTitle title={`${listId ? list?.title : 'Main'} list`} />
       <TodoList onSubmit={handleSubmit} />
     </>
   );

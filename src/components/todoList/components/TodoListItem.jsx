@@ -41,7 +41,7 @@ export function TodoListItem({ todo, onSelect, onDelete }) {
         onChange={handleUpdateStatus}
       />
       <span
-        className={`${checkDueDate()} max-w-[400px] mr-auto grow peer-checked:line-through peer-checked:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap`}
+        className={`${checkDueDate()} max-w-[200px] md:max-w-[400px] mr-auto grow peer-checked:line-through peer-checked:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap`}
       >
         {todo.title}
       </span>
