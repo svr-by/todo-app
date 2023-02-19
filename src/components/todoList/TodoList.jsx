@@ -1,6 +1,11 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo } from '../../redux/slices/todosSlice';
+import {
+  setTodoModalOpen,
+  setSelectedTodoId,
+  requestTodoDeletion,
+  rejectTodoDeletion,
+} from '../../redux/slices/layoutSlice';
 import { Spinner, ConfModal, ListItemForm } from '../index';
 import { TodoListItem } from './components/TodoListItem';
 import { TodoDetails } from './components/TodoDetails';
@@ -8,44 +13,38 @@ import { TodoDetails } from './components/TodoDetails';
 export function TodoList({ onSubmit }) {
   const dispatch = useDispatch();
 
-  const { todos, isLoading } = useSelector((state) => state.todos);
+  const {
+    todos: { todos, isLoading },
+    layout: { isTodoModalOpen, selectedTodoId, deletedTodoId },
+  } = useSelector((state) => state);
 
-  const [selectedTodoId, setSelectedTodoId] = useState(null);
-  const [deletedTodoId, setDeletedTodoId] = useState(null);
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleOpenDetails = (todo) => {
-    todo.id === selectedTodoId ? setSelectedTodoId(null) : setSelectedTodoId(todo.id);
+  const openDetails = (todo) => {
+    todo.id === selectedTodoId
+      ? dispatch(setSelectedTodoId(null))
+      : dispatch(setSelectedTodoId(todo.id));
   };
 
-  const handleCloseDetails = () => {
-    setSelectedTodoId(null);
+  const closeDetails = () => {
+    dispatch(setSelectedTodoId(null));
   };
 
-  const handleOpenModal = (todoId) => {
-    setModalOpen(true);
-    setDeletedTodoId(todoId);
+  const requestDeletion = (todoId) => {
+    dispatch(requestTodoDeletion(todoId));
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setDeletedTodoId(null);
+  const rejectDeletion = () => {
+    dispatch(rejectTodoDeletion());
   };
 
   const handleDelete = () => {
     dispatch(deleteTodo(deletedTodoId));
-    setModalOpen(false);
+    dispatch(setTodoModalOpen(false));
   };
 
   const createTodoList = (todoList, sortField = 'created') => {
     const sortedTodoList = todoList.sort((a, b) => a[sortField] - b[sortField]);
     return sortedTodoList.map((todo) => (
-      <TodoListItem
-        key={todo.id}
-        todo={todo}
-        onSelect={handleOpenDetails}
-        onDelete={handleOpenModal}
-      />
+      <TodoListItem key={todo.id} todo={todo} onSelect={openDetails} onDelete={requestDeletion} />
     ));
   };
 
@@ -73,12 +72,12 @@ export function TodoList({ onSubmit }) {
           </>
         ) : null}
       </div>
-      <TodoDetails todo={selectedTodo} onDelete={handleOpenModal} onClose={handleCloseDetails} />
+      <TodoDetails todo={selectedTodo} onDelete={requestDeletion} onClose={closeDetails} />
       <ConfModal
         message={'Do you really want to delete the todo?'}
-        isOpen={isModalOpen}
+        isOpen={isTodoModalOpen}
         handleConfirm={handleDelete}
-        handleReject={handleCloseModal}
+        handleReject={rejectDeletion}
       />
     </div>
   );

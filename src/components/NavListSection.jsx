@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOutFirebase } from '../firebase/api';
 import { getLists, createList, deleteList } from '../redux/slices/listsSlice';
-import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon } from './icons';
+import {
+  setNavListOpen,
+  setListModalOpen,
+  requestListDeletion,
+  rejectListDeletion,
+} from '../redux/slices/layoutSlice';
+import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon, CrossIcon } from './icons';
 import { NavListItem, ListItemForm, ConfModal } from './index';
 import * as ROUTES from '../core/routes';
 
@@ -13,10 +19,8 @@ export function NavListSection() {
   const {
     user: { user },
     lists: { lists },
+    layout: { isNavListOpen, isListModalOpen, deletedListId },
   } = useSelector((state) => state);
-
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [deletedListId, setDeletedListId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -24,14 +28,12 @@ export function NavListSection() {
     dispatch(getLists(user.uid));
   }, [user.uid, dispatch]);
 
-  const handleOpenModal = (listId) => {
-    setModalOpen(true);
-    setDeletedListId(listId);
+  const requestDeletion = (listId) => {
+    dispatch(requestListDeletion(listId));
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setDeletedListId(null);
+  const rejectDeletion = () => {
+    dispatch(rejectListDeletion());
   };
 
   const handleSigout = () => {
@@ -44,8 +46,12 @@ export function NavListSection() {
 
   const handleDelete = () => {
     dispatch(deleteList(deletedListId));
-    setModalOpen(false);
+    dispatch(setListModalOpen(false));
     navigate(ROUTES.MAIN);
+  };
+
+  const handleCloseNavList = () => {
+    dispatch(setNavListOpen(false));
   };
 
   const mainLists = [
@@ -55,7 +61,14 @@ export function NavListSection() {
   ];
 
   return (
-    <section className="p-5 w-1/4 min-w-[300px] flex-col hidden md:flex">
+    <section
+      className={`absolute z-10 p-5 w-full h-full min-w-[300px] bg-white flex flex-col md:static md:w-1/4 ${
+        isNavListOpen ? '' : 'hidden'
+      } md:flex`}
+    >
+      <div className="absolute top-6 right-6 cursor-pointer md:hidden" onClick={handleCloseNavList}>
+        <CrossIcon className="w-8 h-8" />
+      </div>
       <h1 className="mb-4 text-3xl font-bold uppercase">To-do notes</h1>
       {user && (
         <div className="mb-4 flex gap-4 items-center text-slate-500">
@@ -66,7 +79,7 @@ export function NavListSection() {
       <div className="pr-3 overflow-y-auto scrollbar-thin scrollbar-thumb-violet-400 scrollbar-track-violet-100">
         <ul>
           {mainLists.map((list) => (
-            <NavListItem key={list.title} list={list} />
+            <NavListItem key={list.title} list={list} onClick={handleCloseNavList} />
           ))}
           <hr className="h-0.5 my-4 bg-slate-400" />
           {lists
@@ -76,16 +89,21 @@ export function NavListSection() {
               icon: <ListIcon className="w-4 h-4" />,
             }))
             .map((list) => (
-              <NavListItem key={list.id} list={list} onDelete={handleOpenModal} />
+              <NavListItem
+                key={list.id}
+                list={list}
+                onDelete={requestDeletion}
+                onClick={handleCloseNavList}
+              />
             ))}
           <ListItemForm onSubmit={handleSubmit} placeholder="New list" />
         </ul>
       </div>
       <ConfModal
         message={'Do you really want to delete the list?'}
-        isOpen={isModalOpen}
+        isOpen={isListModalOpen}
         handleConfirm={handleDelete}
-        handleReject={handleCloseModal}
+        handleReject={rejectDeletion}
       />
     </section>
   );
