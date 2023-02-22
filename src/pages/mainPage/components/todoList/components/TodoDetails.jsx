@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { updateTodo } from '../../../redux/slices/todosSlice';
-import { Button, Toggle } from '../../index';
-import { DeleteIcon, StarIcon, CrossIcon } from '../../icons';
+import { updateTodo } from 'redux/slices/todosSlice';
+import { formatedDate } from 'core/utils';
+import { Button, Toggle } from 'components';
+import { DeleteIcon, StarIcon, CrossIcon } from 'components/icons';
 import { TodoInput } from './TodoInput';
 import { TodoSelect } from './TodoSelect';
-import { formatedDate } from '../../../core/utils';
 
 export function TodoDetails({ todo, onClose, onDelete }) {
   const dispatch = useDispatch();

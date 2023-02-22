@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListTodos, getMainTodos, createTodo } from '../redux/slices/todosSlice';
-import { TodoList, TodoListTitle } from './index';
+import { getListTodos, getMainTodos, createTodo } from 'redux/slices/todosSlice';
+import { TodoList } from './todoList/TodoList';
+import { TodoListTitle } from './TodoListTitle';
 
 export function MainList() {
   const dispatch = useDispatch();

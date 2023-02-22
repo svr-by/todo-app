@@ -1,5 +1,5 @@
 import { Modal } from './Modal';
-import { Button } from '../index';
+import { Button } from 'components';
 
 export function ConfModal({ isOpen, handleConfirm, handleReject, message }) {
   return (

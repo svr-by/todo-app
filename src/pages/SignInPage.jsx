@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { signInFirebase } from '../firebase/api';
+import { signInFirebase } from 'api/api';
 import { Link, Navigate } from 'react-router-dom';
-import { UserAuthForm } from '../components';
-import * as ROUTES from '../core/routes';
+import { UserAuthForm } from 'components';
+import * as ROUTES from 'core/routes';
 
 export function SignInPage() {
   const { user } = useSelector((state) => state.user);

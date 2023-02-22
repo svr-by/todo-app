@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PlusIcon } from './icons';
+import { PlusIcon } from 'components/icons';
 
 export function ListItemForm({ onSubmit, placeholder = '' }) {
   const [title, setTitle] = useState('');

@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { storeUserData } from '../redux/slices/userSlice';
-import { onAuthFirebase } from '../firebase/api';
-import { MainList, FavoriteList, PlannedList } from '../components';
-import { SignInPage, SignUpPage, MainPage, LandingPage, NotFoundPage } from '../pages';
-import * as ROUTES from '../core/routes';
+import { storeUserData } from 'redux/slices/userSlice';
+import { onAuthFirebase } from 'api/api';
+import { SignInPage, SignUpPage, MainPage, LandingPage, NotFoundPage } from 'pages';
+import { MainList } from 'pages/mainPage/components/MainList';
+import { FavoriteList } from 'pages/mainPage/components/FavoriteList';
+import { PlannedList } from 'pages/mainPage/components/PlannedList';
+import * as ROUTES from 'core/routes';
 
 function App() {
   const dispatch = useDispatch();

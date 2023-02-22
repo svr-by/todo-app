@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ErrorImg from '../assets/img/error.png';
+import ErrorImg from 'assets/img/error.png';
 
 export class ErrorBoundary extends Component {
   constructor(props) {

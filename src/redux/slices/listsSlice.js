@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import * as firebaseApi from '../../firebase/api';
+import * as firebaseApi from '../../api/api';
 
 const initialState = {
   lists: [],

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { setNavListOpen } from '../redux/slices/layoutSlice';
-import { ListIcon } from './icons';
+import { setNavListOpen } from 'redux/slices/layoutSlice';
+import { ListIcon } from 'components/icons';
 
 export function TodoListTitle({ title }) {
   const dispatch = useDispatch();

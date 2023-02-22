@@ -1,48 +1,11 @@
 import { Link } from 'react-router-dom';
 import Lottie from 'lottie-react';
-import animationData from '../assets/todo-list-animation.json';
-import { GithubIcon, LinkedinIcon, DoneCircleIcon } from '../components/icons';
-import * as ROUTES from '../core/routes';
-
-function NavLink({ to, children }) {
-  return (
-    <Link
-      to={to}
-      className="p-2 border border-purple-700 rounded-2xl text-purple-700 text-xs hover:bg-purple-700 hover:text-white transition duration-300 ease-in-out md:px-4 md:text-base"
-    >
-      {children}
-    </Link>
-  );
-}
-
-function BenefitList({ list }) {
-  return (
-    <ul className="mb-8">
-      {list.map((item, index) => (
-        <li
-          key={index}
-          className="flex gap-4 mb-4 justify-center text-center md:justify-start md:text-left"
-        >
-          <DoneCircleIcon fill="#2a8a9d" className="flex gap-4 mb-4 hidden md:block" />
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function FooterLink({ to, children }) {
-  return (
-    <a
-      href={to}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-block ml-4 hover:text-purple-700"
-    >
-      {children}
-    </a>
-  );
-}
+import animationData from 'assets/todo-list-animation.json';
+import { GithubIcon, LinkedinIcon } from 'components/icons';
+import { NavLink } from './components/NavLink';
+import { BenefitList } from './components/BenefitList';
+import { FooterLink } from './components/FooterLink';
+import * as ROUTES from 'core/routes';
 
 export function LandingPage() {
   return (
@@ -80,9 +43,9 @@ export function LandingPage() {
         <Lottie animationData={animationData} className="w-4/5 md:w-[600px]" />
       </main>
       <footer className="py-6 px-4 flex items-center">
-        <p className="mr-auto text-xs md:text-base">© 2023 Siarhei Rachkouski</p>
+        <p className="mr-auto text-xs md:text-base">©2023 Siarhei Rachkouski</p>
         <div>
-          <FooterLink to="https://github.com/svr-by/todo-app">
+          <FooterLink to="https://github.com/svr-by">
             <GithubIcon />
           </FooterLink>
           <FooterLink to="https://www.linkedin.com/in/siarhei-rachkouski/">

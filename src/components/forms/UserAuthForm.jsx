@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EmailIcon, PasswordIcon } from './icons';
+import { EmailIcon, PasswordIcon } from 'components/icons';
 
 export function UserAuthForm({ onSubmit, submitBtn }) {
   const [email, setEmail] = useState('');

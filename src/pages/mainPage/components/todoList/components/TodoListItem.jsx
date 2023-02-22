@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { updateTodo } from '../../../redux/slices/todosSlice';
-import { DeleteIcon, StarIcon } from '../../icons';
-import { formatedDate } from '../../../core/utils';
+import { updateTodo } from 'redux/slices/todosSlice';
+import { DeleteIcon, StarIcon } from 'components/icons';
+import { formatedDate } from 'core/utils';
 
 export function TodoListItem({ todo, onSelect, onDelete }) {
   const dispatch = useDispatch();

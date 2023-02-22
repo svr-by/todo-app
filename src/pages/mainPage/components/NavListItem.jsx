@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { DeleteIcon } from './icons';
+import { DeleteIcon } from 'components/icons';
 
 export function NavListItem({ list, onDelete, onClick }) {
   const handleDelete = () => {

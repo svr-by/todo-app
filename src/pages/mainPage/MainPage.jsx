@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
-import { NavListSection, Spinner, TodoSection } from '../components';
-import * as ROUTES from '../core/routes';
+import { Spinner } from 'components';
+import { NavListSection } from './components/NavListSection';
+import { TodoSection } from './components/TodoSection';
+import * as ROUTES from 'core/routes';
 
 export function MainPage() {
   const { isLoading, user } = useSelector((state) => state.user);

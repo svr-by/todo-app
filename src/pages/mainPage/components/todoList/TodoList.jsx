@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTodo } from '../../redux/slices/todosSlice';
+import { deleteTodo } from 'redux/slices/todosSlice';
 import {
   setTodoModalOpen,
   setSelectedTodoId,
   requestTodoDeletion,
   rejectTodoDeletion,
-} from '../../redux/slices/layoutSlice';
-import { Spinner, ConfModal, ListItemForm } from '../index';
+} from 'redux/slices/layoutSlice';
+import { Spinner, ConfModal, ListItemForm } from 'components';
 import { TodoListItem } from './components/TodoListItem';
 import { TodoDetails } from './components/TodoDetails';
 

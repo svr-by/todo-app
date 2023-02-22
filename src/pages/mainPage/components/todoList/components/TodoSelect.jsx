@@ -1,4 +1,4 @@
-import { createInputId } from '../../../core/utils';
+import { createInputId } from 'core/utils';
 
 export function TodoSelect({ options, value, label, onChange }) {
   const id = createInputId(label);

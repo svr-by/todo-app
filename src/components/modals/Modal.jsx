@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { CrossIcon } from '../icons/CrossIcon';
+import { CrossIcon } from 'components/icons';
 
 export function Modal({ onClose, children }) {
   const portalRef = useRef(null);

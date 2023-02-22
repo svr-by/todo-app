@@ -1,4 +1,4 @@
-import { createInputId } from '../../../core/utils';
+import { createInputId } from 'core/utils';
 
 export function TodoInput({ type, value, label, onChange, placeholder, ...otheProps }) {
   const id = createInputId(label);

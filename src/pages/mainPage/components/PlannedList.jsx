@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavoriteTodos, createTodo } from '../redux/slices/todosSlice';
-import { TodoList, TodoListTitle } from './index';
+import { formatedDate } from 'core/utils';
+import { getPlannedTodos, createTodo } from 'redux/slices/todosSlice';
+import { TodoList } from './todoList/TodoList';
+import { TodoListTitle } from './TodoListTitle';
 
-export function FavoriteList() {
+export function PlannedList() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getFavoriteTodos(user.uid));
+    dispatch(getPlannedTodos(user.uid));
   }, [user.uid, dispatch]);
 
   const handleSubmit = (title) => {
@@ -18,14 +20,14 @@ export function FavoriteList() {
         listId: '',
         userId: user.uid,
         title,
-        favorite: true,
+        dueDate: formatedDate(Date.now()),
       })
     );
   };
 
   return (
     <>
-      <TodoListTitle title="Favorite list" />
+      <TodoListTitle title="Planned list" />
       <TodoList onSubmit={handleSubmit} />
     </>
   );

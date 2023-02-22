@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOutFirebase } from '../firebase/api';
-import { getLists, createList, deleteList } from '../redux/slices/listsSlice';
+import { signOutFirebase } from 'api/api';
+import { getLists, createList, deleteList } from 'redux/slices/listsSlice';
+import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon, CrossIcon } from 'components/icons';
+import { ListItemForm, ConfModal } from 'components';
 import {
   setNavListOpen,
   setListModalOpen,
   requestListDeletion,
   rejectListDeletion,
-} from '../redux/slices/layoutSlice';
-import { HomeIcon, PlanedIcon, StarIcon, ListIcon, SignOutIcon, CrossIcon } from './icons';
-import { NavListItem, ListItemForm, ConfModal } from './index';
-import * as ROUTES from '../core/routes';
+} from 'redux/slices/layoutSlice';
+import * as ROUTES from 'core/routes';
+import { NavListItem } from './NavListItem';
 
 export function NavListSection() {
   const dispatch = useDispatch();
